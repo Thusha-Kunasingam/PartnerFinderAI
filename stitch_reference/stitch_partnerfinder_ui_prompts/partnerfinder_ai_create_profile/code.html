@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PartnerFinder AI - Create Profile</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#0058be",
+            "on-secondary-container": "#fefcff",
+            "outline": "#7b7487",
+            "error": "#ba1a1a",
+            "surface-bright": "#f8f9ff",
+            "on-secondary-fixed-variant": "#004395",
+            "inverse-primary": "#d2bbff",
+            "tertiary": "#474e64",
+            "primary-fixed-dim": "#d2bbff",
+            "tertiary-fixed-dim": "#bec6e0",
+            "surface": "#f8f9ff",
+            "on-tertiary-container": "#dee5ff",
+            "surface-container": "#e5eeff",
+            "surface-container-high": "#dce9ff",
+            "on-primary": "#ffffff",
+            "surface-tint": "#732ee4",
+            "primary-container": "#7c3aed",
+            "secondary-fixed": "#d8e2ff",
+            "on-primary-fixed-variant": "#5a00c6",
+            "tertiary-container": "#5e667d",
+            "background": "#f8f9ff",
+            "secondary-fixed-dim": "#adc6ff",
+            "on-secondary-fixed": "#001a42",
+            "tertiary-fixed": "#dae2fd",
+            "surface-container-lowest": "#ffffff",
+            "surface-variant": "#d3e4fe",
+            "on-surface": "#0b1c30",
+            "on-background": "#0b1c30",
+            "primary": "#630ed4",
+            "on-error": "#ffffff",
+            "on-primary-container": "#ede0ff",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-low": "#eff4ff",
+            "on-surface-variant": "#4a4455",
+            "on-primary-fixed": "#25005a",
+            "inverse-surface": "#213145",
+            "primary-fixed": "#eaddff",
+            "on-tertiary-fixed": "#131b2e",
+            "error-container": "#ffdad6",
+            "on-tertiary": "#ffffff",
+            "surface-container-highest": "#d3e4fe",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "surface-dim": "#cbdbf5",
+            "outline-variant": "#ccc3d8",
+            "secondary-container": "#2170e4",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "space-xl": "1.5rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "0.75rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-md": ["Inter"],
+            "label-xs": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-xs": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md antialiased">
+<!-- Top Navigation Header (from Shared Components JSON) -->
+<header class="bg-on-background w-full border-b border-tertiary-container shadow-sm">
+<div class="flex justify-between items-center w-full px-8 max-w-[1440px] mx-auto h-16">
+<div class="text-headline-md font-headline-md font-bold text-surface-container-lowest flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="hub">hub</span>
+        PartnerFinder AI
+      </div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Home</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">How It Works</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Success Stories</a>
+</nav>
+<div class="flex items-center gap-4">
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Login</a>
+<button class="bg-primary-container text-on-primary rounded-lg px-4 py-2 text-label-md font-label-md transition-all duration-150 active:scale-[0.98] hover:brightness-105">
+          Register
+        </button>
+</div>
+</div>
+</header>
+<!-- Main Content Workspace (Desktop Onboarding Canvas) -->
+<main class="flex-1 flex items-center justify-center p-8">
+<!-- Single Large Card Container (12px radius, soft border, subtle elevation) -->
+<div class="w-full max-w-[960px] bg-surface-container-lowest border border-outline-variant/40 rounded-xl shadow-[0_1px_3px_0_rgba(15,23,42,0.05),0_1px_2px_-1px_rgba(15,23,42,0.03)] flex flex-col md:flex-row overflow-hidden">
+<!-- Left Narrow Column: Vertical Onboarding Progress -->
+<aside class="w-full md:w-[260px] bg-surface border-r border-outline-variant/30 p-8 flex flex-col justify-start">
+<div class="space-y-6">
+<!-- Basic Info — active purple -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-md text-label-md font-semibold shadow-sm">
+              1
+            </div>
+<span class="text-primary-container font-headline-sm text-headline-sm font-semibold">
+              Basic Info
+            </span>
+</div>
+<!-- Skills — inactive gray -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-tertiary flex items-center justify-center font-label-md text-label-md font-medium border border-outline-variant/50">
+              2
+            </div>
+<span class="text-tertiary font-label-md text-label-md font-normal">
+              Skills
+            </span>
+</div>
+<!-- Interests — inactive gray -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-tertiary flex items-center justify-center font-label-md text-label-md font-medium border border-outline-variant/50">
+              3
+            </div>
+<span class="text-tertiary font-label-md text-label-md font-normal">
+              Interests
+            </span>
+</div>
+<!-- Complete — inactive gray -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-tertiary flex items-center justify-center font-label-md text-label-md font-medium border border-outline-variant/50">
+              4
+            </div>
+<span class="text-tertiary font-label-md text-label-md font-normal">
+              Complete
+            </span>
+</div>
+</div>
+</aside>
+<!-- Right Main Column: Basic Information Form -->
+<section class="flex-1 p-8 md:p-10 flex flex-col justify-between bg-surface-container-lowest">
+<div>
+<!-- Header Area -->
+<div class="mb-6">
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Basic Information</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">Tell us about yourself.</p>
+</div>
+<!-- Top Center Circular Avatar with Change Photo Link -->
+<div class="flex flex-col items-center justify-center mb-8">
+<div class="relative w-20 h-20 rounded-full bg-surface-container border border-outline-variant/50 flex items-center justify-center overflow-hidden mb-2">
+<span class="material-symbols-outlined text-outline text-[40px]" data-icon="person">person</span>
+</div>
+<button class="text-primary-container hover:text-primary font-label-sm text-label-sm font-medium transition-colors duration-150" type="button">
+              Change Photo
+            </button>
+</div>
+<!-- Form Fields Cluster -->
+<form class="space-y-4">
+<!-- Full Name -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="full-name">Full Name</label>
+<input class="w-full h-[40px] px-3 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 placeholder-outline-variant" id="full-name" placeholder="e.g. Alex Morgan" type="text"/>
+</div>
+<!-- University & Course (Two Columns Grid for Compact Desktop Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- University -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="university">University</label>
+<input class="w-full h-[40px] px-3 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 placeholder-outline-variant" id="university" placeholder="e.g. Stanford University" type="text"/>
+</div>
+<!-- Course -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="course">Course</label>
+<input class="w-full h-[40px] px-3 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 placeholder-outline-variant" id="course" placeholder="e.g. Computer Science" type="text"/>
+</div>
+</div>
+<!-- Year & Location (Two Columns Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Year -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="year">Year</label>
+<input class="w-full h-[40px] px-3 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 placeholder-outline-variant" id="year" placeholder="e.g. Junior (Year 3)" type="text"/>
+</div>
+<!-- Location -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="location">Location</label>
+<input class="w-full h-[40px] px-3 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 placeholder-outline-variant" id="location" placeholder="e.g. San Francisco, CA" type="text"/>
+</div>
+</div>
+<!-- About Me (Multiline Textarea) -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="about-me">About Me</label>
+<textarea class="w-full p-3 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 placeholder-outline-variant resize-none" id="about-me" placeholder="Provide a brief summary of your background, technical focus, and collaboration goals..." rows="4"></textarea>
+</div>
+</form>
+</div>
+<!-- Action Bar: Bottom Right Purple-to-Blue Gradient Next Button -->
+<div class="flex justify-end items-center pt-6 mt-6 border-t border-outline-variant/20">
+<button class="h-[42px] px-[18px] rounded-lg text-on-primary text-label-md font-label-md font-medium bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] hover:brightness-105 transition-all duration-150 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_14px_0_rgba(124,58,237,0.35)] active:scale-[0.98]" type="button">
+            Next
+          </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer (from Shared Components JSON) -->
+<footer class="bg-on-background w-full border-t border-tertiary-container">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-8 max-w-[1440px] mx-auto gap-4">
+<div class="text-headline-sm font-headline-sm font-bold text-surface-container-lowest">
+        PartnerFinder AI
+      </div>
+<p class="text-surface-container-highest text-body-sm font-body-sm">
+        © 2025 PartnerFinder AI. All rights reserved.
+      </p>
+<div class="flex items-center gap-6">
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Privacy Policy</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Terms of Service</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Security</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</body></html>

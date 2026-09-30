@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PartnerFinder AI - Add Your Skills</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#001a42",
+            "surface-tint": "#732ee4",
+            "on-secondary": "#ffffff",
+            "tertiary": "#474e64",
+            "surface-container-highest": "#d3e4fe",
+            "on-background": "#0b1c30",
+            "on-primary-fixed-variant": "#5a00c6",
+            "on-surface": "#0b1c30",
+            "on-primary-container": "#ede0ff",
+            "on-error-container": "#93000a",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "secondary": "#0058be",
+            "surface": "#f8f9ff",
+            "error": "#ba1a1a",
+            "surface-bright": "#f8f9ff",
+            "outline-variant": "#ccc3d8",
+            "surface-variant": "#d3e4fe",
+            "on-surface-variant": "#4a4455",
+            "inverse-surface": "#213145",
+            "on-secondary-fixed-variant": "#004395",
+            "error-container": "#ffdad6",
+            "surface-dim": "#cbdbf5",
+            "on-primary": "#ffffff",
+            "secondary-container": "#2170e4",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed-dim": "#adc6ff",
+            "primary-fixed": "#eaddff",
+            "on-tertiary-container": "#dee5ff",
+            "primary-container": "#7c3aed",
+            "outline": "#7b7487",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#131b2e",
+            "surface-container-low": "#eff4ff",
+            "on-primary-fixed": "#25005a",
+            "background": "#f8f9ff",
+            "surface-container": "#e5eeff",
+            "inverse-primary": "#d2bbff",
+            "tertiary-fixed-dim": "#bec6e0",
+            "primary": "#630ed4",
+            "secondary-fixed": "#d8e2ff",
+            "primary-fixed-dim": "#d2bbff",
+            "tertiary-container": "#5e667d",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-fixed": "#dae2fd",
+            "on-secondary-container": "#fefcff",
+            "surface-container-high": "#dce9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-lg": "1.25rem",
+            "space-md": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-xl": "1.5rem",
+            "gutter": "1.5rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "code-sm": ["JetBrains Mono"],
+            "headline-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "label-xs": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-md": ["Inter"]
+          },
+          "fontSize": {
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "label-xs": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Header (from Shared Components JSON) -->
+<header class="w-full bg-on-background border-b border-tertiary-container shadow-sm">
+<div class="flex justify-between items-center w-full px-8 max-w-[1440px] mx-auto h-16">
+<div class="flex items-center gap-8">
+<a class="text-headline-md font-headline-md font-bold text-surface-container-lowest flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span>PartnerFinder AI</span>
+</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-surface-container-highest font-normal text-label-md font-label-md hover:text-surface-container-lowest transition-colors duration-150" href="#">Home</a>
+<a class="text-surface-container-highest font-normal text-label-md font-label-md hover:text-surface-container-lowest transition-colors duration-150" href="#">How It Works</a>
+<a class="text-surface-container-highest font-normal text-label-md font-label-md hover:text-surface-container-lowest transition-colors duration-150" href="#">Success Stories</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-surface-container-highest font-normal text-label-md font-label-md hover:text-surface-container-lowest transition-colors duration-150 px-3 py-2" type="button">
+          Login
+        </button>
+<button class="bg-primary-container text-surface-container-lowest text-label-md font-label-md px-4 py-2 rounded-lg font-medium hover:brightness-105 transition-all duration-150 active:scale-[0.98]" type="button">
+          Register
+        </button>
+</div>
+</div>
+</header>
+<!-- Main Canvas Container (1440px Reference layout) -->
+<main class="flex-1 flex items-center justify-center py-10 px-4 md:px-8">
+<div class="w-full max-w-[1040px] bg-surface-container-lowest rounded-xl border border-[#E2E8F0] shadow-[0_1px_3px_0_rgba(15,23,42,0.05),0_1px_2px_-1px_rgba(15,23,42,0.03)] overflow-hidden flex flex-col md:flex-row">
+<!-- Left Onboarding Progress Column -->
+<aside class="w-full md:w-[260px] bg-[#F8FAFC] border-b md:border-b-0 md:border-r border-[#E2E8F0] p-6 flex flex-col justify-between">
+<div>
+<div class="text-label-xs font-label-xs uppercase tracking-wider text-[#64748B] mb-6">Onboarding Steps</div>
+<div class="flex flex-col gap-5">
+<!-- Step 1: Basic Info -->
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-full bg-[#10B981] text-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<div class="text-label-md font-label-md text-[#1E293B]">Basic Info</div>
+</div>
+</div>
+<!-- Step 2: Skills (Active) -->
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-full bg-primary-container text-surface-container-lowest flex items-center justify-center text-label-sm font-label-sm font-bold shadow-[0_0_0_3px_rgba(124,58,237,0.15)]">
+                2
+              </div>
+<div>
+<div class="text-label-md font-label-md font-bold text-primary-container">Skills</div>
+</div>
+</div>
+<!-- Step 3: Interests -->
+<div class="flex items-center gap-3 opacity-60">
+<div class="w-7 h-7 rounded-full bg-[#E2E8F0] text-[#64748B] flex items-center justify-center text-label-sm font-label-sm font-medium">
+                3
+              </div>
+<div>
+<div class="text-label-md font-label-md text-[#64748B]">Interests</div>
+</div>
+</div>
+<!-- Step 4: Complete -->
+<div class="flex items-center gap-3 opacity-60">
+<div class="w-7 h-7 rounded-full bg-[#E2E8F0] text-[#64748B] flex items-center justify-center text-label-sm font-label-sm font-medium">
+                4
+              </div>
+<div>
+<div class="text-label-md font-label-md text-[#64748B]">Complete</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-[#E2E8F0] hidden md:block">
+<p class="text-body-sm font-body-sm text-[#64748B]">Step 2 of 4</p>
+<div class="w-full bg-[#E2E8F0] h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary-container h-full w-2/4 rounded-full"></div>
+</div>
+</div>
+</aside>
+<!-- Right Skills Section Workspace -->
+<section class="flex-1 p-6 md:p-8 flex flex-col justify-between">
+<div>
+<!-- Title & Subtitle -->
+<div class="mb-6">
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Add Your Skills</h1>
+<p class="text-body-md font-body-md text-[#64748B] mt-1">Select the skills you have and set your level.</p>
+</div>
+<!-- Search Input -->
+<div class="relative mb-6">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#94A3B8] text-[20px]">
+              search
+            </span>
+<input class="w-full h-[44px] pl-10 pr-4 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg text-body-md font-body-md text-on-surface placeholder-[#94A3B8] focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/15 transition-all" placeholder="Search skills..." type="text"/>
+</div>
+<!-- Popular Skills Section -->
+<div class="mb-8">
+<h2 class="text-label-xs font-label-xs uppercase tracking-wider text-[#64748B] mb-3">Popular Skills</h2>
+<div class="flex flex-wrap gap-2">
+<!-- Selected Chips (C#, Angular, SQL, HTML, CSS) -->
+<button class="h-6 px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm font-medium flex items-center gap-1.5" type="button">
+<span>C#</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<button class="h-6 px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm font-medium flex items-center gap-1.5" type="button">
+<span>Angular</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<button class="h-6 px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm font-medium flex items-center gap-1.5" type="button">
+<span>SQL</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<button class="h-6 px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm font-medium flex items-center gap-1.5" type="button">
+<span>HTML</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<button class="h-6 px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm font-medium flex items-center gap-1.5" type="button">
+<span>CSS</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<!-- Unselected Chips (Python, Machine Learning, UI/UX) -->
+<button class="h-6 px-2.5 rounded-full bg-surface-container-lowest border border-[#E2E8F0] text-[#64748B] text-label-sm font-label-sm hover:border-[#CBD5E1] hover:text-on-surface transition-colors" type="button">
+                Python
+              </button>
+<button class="h-6 px-2.5 rounded-full bg-surface-container-lowest border border-[#E2E8F0] text-[#64748B] text-label-sm font-label-sm hover:border-[#CBD5E1] hover:text-on-surface transition-colors" type="button">
+                Machine Learning
+              </button>
+<button class="h-6 px-2.5 rounded-full bg-surface-container-lowest border border-[#E2E8F0] text-[#64748B] text-label-sm font-label-sm hover:border-[#CBD5E1] hover:text-on-surface transition-colors" type="button">
+                UI/UX
+              </button>
+</div>
+</div>
+<!-- Selected Skills Section -->
+<div class="mb-6">
+<h2 class="text-label-xs font-label-xs uppercase tracking-wider text-[#64748B] mb-3">Selected Skills</h2>
+<div class="border border-[#E2E8F0] rounded-lg divide-y divide-[#F1F5F9] bg-surface-container-lowest">
+<!-- Row 1: Angular -->
+<div class="h-[52px] px-4 flex items-center justify-between hover:bg-[#F8FAFC] transition-colors">
+<span class="text-body-md font-body-md font-medium text-on-surface">Angular</span>
+<div class="flex items-center gap-3">
+<div class="relative">
+<select class="h-[36px] pl-3 pr-8 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg text-label-sm font-label-sm text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none appearance-none">
+<option value="Beginner">Beginner</option>
+<option selected="" value="Intermediate">Intermediate</option>
+<option value="Advanced">Advanced</option>
+<option value="Expert">Expert</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-[#94A3B8] text-[18px] pointer-events-none">
+                      expand_more
+                    </span>
+</div>
+<button aria-label="Delete Angular" class="text-[#EF4444] hover:bg-[#FEF2F2] p-1.5 rounded transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 2: C# -->
+<div class="h-[52px] px-4 flex items-center justify-between hover:bg-[#F8FAFC] transition-colors">
+<span class="text-body-md font-body-md font-medium text-on-surface">C#</span>
+<div class="flex items-center gap-3">
+<div class="relative">
+<select class="h-[36px] pl-3 pr-8 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg text-label-sm font-label-sm text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none appearance-none">
+<option value="Beginner">Beginner</option>
+<option selected="" value="Intermediate">Intermediate</option>
+<option value="Advanced">Advanced</option>
+<option value="Expert">Expert</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-[#94A3B8] text-[18px] pointer-events-none">
+                      expand_more
+                    </span>
+</div>
+<button aria-label="Delete C#" class="text-[#EF4444] hover:bg-[#FEF2F2] p-1.5 rounded transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 3: SQL -->
+<div class="h-[52px] px-4 flex items-center justify-between hover:bg-[#F8FAFC] transition-colors">
+<span class="text-body-md font-body-md font-medium text-on-surface">SQL</span>
+<div class="flex items-center gap-3">
+<div class="relative">
+<select class="h-[36px] pl-3 pr-8 bg-surface-container-lowest border border-[#E2E8F0] rounded-lg text-label-sm font-label-sm text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none appearance-none">
+<option selected="" value="Beginner">Beginner</option>
+<option value="Intermediate">Intermediate</option>
+<option value="Advanced">Advanced</option>
+<option value="Expert">Expert</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-[#94A3B8] text-[18px] pointer-events-none">
+                      expand_more
+                    </span>
+</div>
+<button aria-label="Delete SQL" class="text-[#EF4444] hover:bg-[#FEF2F2] p-1.5 rounded transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Add Custom Skill Button -->
+<div class="mt-3">
+<button class="h-[40px] px-4 rounded-lg border border-dashed border-[#CBD5E1] text-[#64748B] hover:border-primary-container hover:text-primary-container text-label-md font-label-md flex items-center gap-2 transition-colors w-full justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Add Custom Skill</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Action Row -->
+<div class="pt-6 border-t border-[#E2E8F0] flex items-center justify-between">
+<button class="h-[42px] px-5 rounded-lg border border-[#E2E8F0] bg-surface-container-lowest text-[#1E293B] text-label-md font-label-md hover:bg-[#F8FAFC] hover:border-[#CBD5E1] transition-all" type="button">
+            Back
+          </button>
+<button class="h-[42px] px-6 rounded-lg text-surface-container-lowest text-label-md font-label-md font-medium bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] hover:brightness-105 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_14px_0_rgba(124,58,237,0.35)] transition-all" type="button">
+            Next
+          </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Web Footer (from Shared Components JSON) -->
+<footer class="w-full bg-on-background border-t border-tertiary-container">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-8 max-w-[1440px] mx-auto gap-4">
+<div class="flex items-center gap-6">
+<span class="text-headline-sm font-headline-sm font-bold text-surface-container-lowest">PartnerFinder AI</span>
+<span class="text-surface-container-highest text-body-sm font-body-sm">© 2025 PartnerFinder AI. All rights reserved.</span>
+</div>
+<div class="flex items-center gap-6 text-label-sm font-label-sm">
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Privacy Policy</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Terms of Service</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Security</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PartnerFinder AI - Find Study, Project &amp; Hackathon Partners</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#732ee4",
+            "on-secondary-fixed-variant": "#004395",
+            "surface-container-high": "#dce9ff",
+            "on-surface-variant": "#4a4455",
+            "on-tertiary-container": "#dee5ff",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#ede0ff",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed": "#001a42",
+            "primary-fixed": "#eaddff",
+            "inverse-on-surface": "#eaf1ff",
+            "primary": "#630ed4",
+            "primary-container": "#7c3aed",
+            "primary-fixed-dim": "#d2bbff",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "outline": "#7b7487",
+            "on-secondary-container": "#fefcff",
+            "on-secondary": "#ffffff",
+            "inverse-primary": "#d2bbff",
+            "outline-variant": "#ccc3d8",
+            "error": "#ba1a1a",
+            "surface": "#f8f9ff",
+            "tertiary-fixed": "#dae2fd",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-background": "#0b1c30",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#2170e4",
+            "surface-container": "#e5eeff",
+            "secondary-fixed": "#d8e2ff",
+            "surface-bright": "#f8f9ff",
+            "surface-dim": "#cbdbf5",
+            "on-tertiary-fixed": "#131b2e",
+            "tertiary-container": "#5e667d",
+            "secondary-fixed-dim": "#adc6ff",
+            "inverse-surface": "#213145",
+            "on-primary-fixed": "#25005a",
+            "tertiary-fixed-dim": "#bec6e0",
+            "background": "#f8f9ff",
+            "on-surface": "#0b1c30",
+            "on-primary-fixed-variant": "#5a00c6",
+            "surface-container-low": "#eff4ff",
+            "error-container": "#ffdad6",
+            "tertiary": "#474e64",
+            "surface-variant": "#d3e4fe",
+            "secondary": "#0058be"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "0.75rem",
+            "space-lg": "1.25rem",
+            "margin": "2rem",
+            "gutter": "1.5rem",
+            "space-xl": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Inter"],
+            "label-xs": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "body-sm": ["Inter"],
+            "display-lg": ["Inter"]
+          },
+          "fontSize": {
+            "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "label-xs": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary selection:text-white">
+<!-- Top Navigation Bar (Shared Component: TopNavBar) -->
+<header class="bg-on-background dark:bg-on-background border-b border-tertiary-container dark:border-tertiary-container shadow-sm dark:shadow-none w-full sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-8 max-w-[1440px] mx-auto h-16">
+<!-- Brand Logo / Product Name -->
+<div class="text-headline-md font-headline-md font-bold text-surface-container-lowest dark:text-surface-container-lowest flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-container to-secondary-container flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="hub">hub</span>
+</div>
+<span class="">PartnerFinder AI</span>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-surface-container-lowest dark:text-surface-container-lowest font-medium text-label-md font-label-md transition-all duration-150 active:scale-[0.98]" href="#home">Home</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest font-normal hover:text-surface-container-lowest dark:hover:text-surface-container-lowest text-label-md font-label-md transition-colors duration-150" href="#how-it-works">How It Works</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest font-normal hover:text-surface-container-lowest dark:hover:text-surface-container-lowest text-label-md font-label-md transition-colors duration-150" href="#success-stories">Success Stories</a>
+</nav>
+<!-- Actions (Login & Register) -->
+<div class="flex items-center gap-3">
+<button class="h-[40px] px-4 rounded-lg border border-tertiary-container text-surface-container-lowest hover:border-surface-container-highest text-label-md font-label-md transition-all duration-150 active:scale-[0.98]" type="button">
+          Login
+        </button>
+<button class="h-[40px] px-4 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-white text-label-md font-label-md font-medium shadow-sm hover:brightness-105 transition-all duration-150 active:scale-[0.98]" type="button">
+          Register
+        </button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (Desktop 1440px Reference Grid) -->
+<main class="w-full flex-1 flex flex-col items-center">
+<!-- Hero Section (Dark navy-to-purple background block) -->
+<section class="w-full bg-gradient-to-r from-[#0b1c30] via-[#131b2e] to-[#25005a] border-b border-slate-800 text-white py-12 px-8">
+<div class="max-w-[1440px] mx-auto grid grid-cols-12 gap-gutter items-center">
+<!-- Left Text Cluster -->
+<div class="col-span-12 lg:col-span-7 flex flex-col justify-center space-y-5">
+<h1 class="text-display-lg font-display-lg text-white tracking-tight">
+            Find the right person to learn, <span class="text-purple-400">build and grow</span> with.
+          </h1>
+<p class="text-body-lg font-body-lg text-surface-container-highest max-w-xl">
+            Connect with students, developers and creators for study, projects, hackathons and more.
+          </p>
+<div class="flex items-center gap-4 pt-2">
+<button class="h-[42px] px-[18px] rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-white text-label-md font-label-md font-medium shadow-md hover:brightness-105 transition-all active:scale-[0.98] flex items-center gap-2" type="button">
+<span class="">Find a Partner</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="h-[42px] px-4 rounded-lg border border-slate-400 text-white hover:bg-white/10 text-label-md font-label-md font-medium transition-all active:scale-[0.98] flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="play_circle">play_circle</span>
+<span class="">Watch Video</span>
+</button>
+</div>
+</div>
+<!-- Right Side Illustration Container -->
+<div class="col-span-12 lg:col-span-5 flex justify-center lg:justify-end">
+<div class="w-full max-w-[480px] h-[310px] rounded-xl overflow-hidden border border-slate-700/60 shadow-2xl relative bg-[#0b1c30]">
+<img alt="Collaborative university students using PartnerFinder AI" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1tynpzKKdWQ08o8m37xatFM4IpVemjOC7t5OJujpiVnhoEwBPuXDyitnKF7zr5BDgVIVr9Q8f1i1cSDqhPB53NNb2t56EsN0p7NheOz5edcOOrURqU84HPMs7yUzjzal6gTvV4HqqlPnV9aKiaAjvCCBOs8DnbjrzLAZftEAzJtoAc6JClq8f4Y7ub5e8q4kK2QUf1oyMvYzF_qWKbGznIg7NJiIl-L8zz-20v7HtRxBGWF1x-cIayQ">
+</div>
+</div>
+</div>
+</section>
+<!-- Five Cards Section Directly Below Hero -->
+<section class="w-full px-8 py-10 max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-150 flex flex-col">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed/50 text-primary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[22px]" data-icon="school">school</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Study Partner</h3>
+<p class="text-body-sm font-body-sm text-tertiary">Learn together and master coursework</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-150 flex flex-col">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed/50 text-secondary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[22px]" data-icon="code">code</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Project Partner</h3>
+<p class="text-body-sm font-body-sm text-tertiary">Build portfolio-ready projects together</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-150 flex flex-col">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed/50 text-primary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[22px]" data-icon="emoji_events">emoji_events</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Hackathon Team</h3>
+<p class="text-body-sm font-body-sm text-tertiary">Form winning teams for hackathons</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-150 flex flex-col">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed/50 text-secondary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[22px]" data-icon="swap_horiz">swap_horiz</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Skill Exchange</h3>
+<p class="text-body-sm font-body-sm text-tertiary">Teach what you know, learn what you need</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-150 flex flex-col">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed/50 text-primary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[22px]" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Startup Partner</h3>
+<p class="text-body-sm font-body-sm text-tertiary">Find co-founders and launch new ideas</p>
+</div>
+</div>
+</section>
+<!-- How it works? Section -->
+<section class="w-full px-8 py-10 max-w-[1440px] mx-auto border-t border-slate-200" id="how-it-works">
+<div class="mb-8">
+<h2 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">How it works?</h2>
+<p class="text-body-md font-body-md text-tertiary">A direct three-step progression to start collaborating immediately.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col relative">
+<div class="flex items-center justify-between mb-4">
+<span class="w-8 h-8 rounded-full bg-[#0b1c30] text-white flex items-center justify-center font-bold text-label-sm font-label-sm">1</span>
+<span class="material-symbols-outlined text-slate-400 text-[20px]" data-icon="badge">badge</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Create Profile</h3>
+<p class="text-body-md font-body-md text-tertiary">List your target goals, universities, and technical skillset.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col relative">
+<div class="flex items-center justify-between mb-4">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-label-sm font-label-sm">2</span>
+<span class="material-symbols-outlined text-slate-400 text-[20px]" data-icon="person_search">person_search</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Find Partners</h3>
+<p class="text-body-md font-body-md text-tertiary">AI calculates skill affinity and matches mutual requirements.</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col relative">
+<div class="flex items-center justify-between mb-4">
+<span class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-label-sm font-label-sm">3</span>
+<span class="material-symbols-outlined text-slate-400 text-[20px]" data-icon="handshake">handshake</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Connect &amp; Collaborate</h3>
+<p class="text-body-md font-body-md text-tertiary">Initiate workspace chats, plan milestones, and ship together.</p>
+</div>
+</div>
+</section>
+<!-- Bottom Section: 3 Clean Columns (Popular Skills, Recently Joined, Success Stories) -->
+<section class="w-full px-8 py-10 max-w-[1440px] mx-auto border-t border-slate-200 mb-6" id="success-stories">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Area 1: Popular Skills -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="trending_up">trending_up</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Popular Skills</h3>
+</div>
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">Python</span>
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">Angular</span>
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">Machine Learning</span>
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">UI/UX</span>
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">C#</span>
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">SQL</span>
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">React</span>
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">Flutter</span>
+<span class="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-label-sm font-label-sm flex items-center">Data Science</span>
+</div>
+</div>
+<!-- Area 2: Recently Joined -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="group">group</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Recently Joined</h3>
+</div>
+<div class="space-y-3">
+<!-- Student 1 -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-label-sm font-label-sm text-primary">KT</div>
+<div class="flex-1 min-w-0">
+<p class="text-label-md font-label-md text-on-surface truncate">K.Thulaanchan</p>
+<span class="inline-block text-label-xs font-label-xs text-tertiary bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">Stanford University</span>
+</div>
+</div>
+<!-- Student 2 -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-label-sm font-label-sm text-secondary">VV</div>
+<div class="flex-1 min-w-0">
+<p class="text-label-md font-label-md text-on-surface truncate">V.Vishanan</p>
+<span class="inline-block text-label-xs font-label-xs text-tertiary bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">MIT</span>
+</div>
+</div>
+<!-- Student 3 -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-label-sm font-label-sm text-primary-container">SP</div>
+<div class="flex-1 min-w-0">
+<p class="text-label-md font-label-md text-on-surface truncate">S.Priyanka</p>
+<span class="inline-block text-label-xs font-label-xs text-tertiary bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">UC Berkeley</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Area 3: Success Stories -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-purple-600 text-[20px]" data-icon="format_quote">format_quote</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Success Stories</h3>
+</div>
+<p class="text-body-md font-body-md text-tertiary italic">
+              "Through PartnerFinder AI, I matched with an ML engineer from Georgia Tech in under 24 hours. Together, we designed and shipped our neural model for the global health AI challenge."
+            </p>
+</div>
+<div class="pt-4 border-t border-slate-100 mt-4 flex items-center justify-between">
+<div>
+<p class="text-label-md font-label-md text-on-surface">Elena Rostova</p>
+<p class="text-label-xs font-label-xs text-tertiary">CS &amp; AI Student Researcher</p>
+</div>
+<span class="text-label-xs font-label-xs px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">1st Place AI Hackathon</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+
+</body></html>

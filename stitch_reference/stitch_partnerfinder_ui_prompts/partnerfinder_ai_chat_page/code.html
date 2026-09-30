@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PartnerFinder AI - Chat</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#d3e4fe",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container-high": "#dce9ff",
+            "primary-fixed-dim": "#d2bbff",
+            "background": "#f8f9ff",
+            "secondary": "#0058be",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#dee5ff",
+            "secondary-container": "#2170e4",
+            "on-primary-fixed-variant": "#5a00c6",
+            "inverse-primary": "#d2bbff",
+            "outline": "#7b7487",
+            "surface-bright": "#f8f9ff",
+            "on-secondary-fixed": "#001a42",
+            "on-surface": "#0b1c30",
+            "secondary-fixed-dim": "#adc6ff",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#4a4455",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#25005a",
+            "on-primary-container": "#ede0ff",
+            "on-primary": "#ffffff",
+            "inverse-surface": "#213145",
+            "primary-fixed": "#eaddff",
+            "on-background": "#0b1c30",
+            "outline-variant": "#ccc3d8",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "tertiary-fixed": "#dae2fd",
+            "surface-container-low": "#eff4ff",
+            "surface-dim": "#cbdbf5",
+            "error": "#ba1a1a",
+            "surface": "#f8f9ff",
+            "primary": "#630ed4",
+            "surface-tint": "#732ee4",
+            "secondary-fixed": "#d8e2ff",
+            "tertiary": "#474e64",
+            "primary-container": "#7c3aed",
+            "tertiary-fixed-dim": "#bec6e0",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-container": "#5e667d",
+            "on-secondary-fixed-variant": "#004395",
+            "on-secondary-container": "#fefcff",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#131b2e",
+            "surface-container": "#e5eeff",
+            "error-container": "#ffdad6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-lg": "1.25rem",
+            "margin": "2rem",
+            "space-md": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-xl": "1.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-xs": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "label-sm": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "display-lg": ["Inter"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "label-xs": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased flex flex-col min-h-screen">
+<header class="w-full bg-on-background border-b border-tertiary-container shadow-sm docked full-width top">
+<div class="flex justify-between items-center w-full px-8 max-w-[1440px] mx-auto h-16">
+<div class="flex items-center gap-3">
+<a class="text-headline-md font-headline-md font-bold text-surface-container-lowest flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="hub">hub</span>
+          PartnerFinder AI
+        </a>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-label-md font-label-md text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Home</a>
+<a class="text-label-md font-label-md text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">How It Works</a>
+<a class="text-label-md font-label-md text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Success Stories</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 border border-tertiary-container rounded-lg text-label-md font-label-md text-surface-container-lowest hover:border-surface-variant transition-all duration-150 active:scale-[0.98]">
+          Login
+        </button>
+<button class="px-4 py-2 rounded-lg text-label-md font-label-md bg-primary-container text-surface-container-lowest shadow-sm hover:opacity-95 transition-all duration-150 active:scale-[0.98]">
+          Register
+        </button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center py-8 px-4">
+<div class="w-full max-w-[1080px] h-[640px] bg-surface-container-lowest rounded-xl border border-surface-variant shadow-[0_4px_20px_-4px_rgba(15,23,42,0.06)] flex overflow-hidden">
+<aside class="w-[320px] flex-shrink-0 border-r border-surface-variant flex flex-col bg-surface-container-lowest">
+<div class="p-4 border-b border-surface-variant flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<h1 class="text-headline-sm font-headline-sm text-on-surface">Chats</h1>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-primary text-label-xs font-label-xs font-semibold">3 active</span>
+</div>
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="search">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg border border-surface-variant bg-surface-bright text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Search messages..." type="text">
+</div>
+</div>
+<div class="flex-1 overflow-y-auto divide-y divide-surface-container-low">
+<div class="p-3.5 bg-primary-fixed/30 border-l-4 border-primary-container cursor-pointer transition-colors flex items-center gap-3">
+<div class="relative flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-primary-container text-surface-container-lowest flex items-center justify-center text-label-md font-label-md font-semibold">KT</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-on-surface truncate">K.Thulaanchan</span>
+<span class="text-label-xs font-label-xs text-primary font-medium">Just now</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant truncate mt-0.5 font-medium text-on-surface">Let's work together.</p>
+</div>
+</div>
+<div class="p-3.5 hover:bg-surface-bright cursor-pointer transition-colors flex items-center gap-3">
+<div class="relative flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-container text-tertiary flex items-center justify-center text-label-md font-label-md font-semibold">VV</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-medium text-on-surface truncate">V.Vishanan</span>
+<span class="text-label-xs font-label-xs text-outline">2h ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline truncate mt-0.5">Sounds good, see you tomorrow</p>
+</div>
+</div>
+<div class="p-3.5 hover:bg-surface-bright cursor-pointer transition-colors flex items-center gap-3">
+<div class="relative flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-container text-tertiary flex items-center justify-center text-label-md font-label-md font-semibold">SP</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-medium text-on-surface truncate">S.Priyanka</span>
+<span class="text-label-xs font-label-xs text-outline">Yesterday</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline truncate mt-0.5">Shared a link to GitHub repo</p>
+</div>
+</div>
+</div>
+</aside>
+<section class="flex-1 flex flex-col bg-surface-container-low/40">
+<div class="h-16 px-6 bg-surface-container-lowest border-b border-surface-variant flex items-center justify-between flex-shrink-0">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-primary-container text-surface-container-lowest flex items-center justify-center text-label-md font-label-md font-semibold">KT</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest"></span>
+</div>
+<div>
+<div class="text-headline-sm font-headline-sm text-on-surface leading-none">K.Thulaanchan</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-label-xs font-label-xs text-emerald-600 font-medium">Online</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="p-2 rounded-lg hover:bg-surface-bright hover:text-on-surface transition-colors" title="Call">
+<span class="material-symbols-outlined text-[20px]" data-icon="call">call</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-bright hover:text-on-surface transition-colors" title="Video call">
+<span class="material-symbols-outlined text-[20px]" data-icon="videocam">videocam</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-bright hover:text-on-surface transition-colors" title="More options">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="flex-1 p-6 overflow-y-auto space-y-4">
+<div class="flex justify-start">
+<div class="max-w-[70%]">
+<div class="bg-surface-container-lowest text-on-surface rounded-2xl rounded-tl-sm px-4 py-2.5 shadow-sm border border-surface-variant">
+<p class="text-body-md font-body-md leading-relaxed">Hi! I saw your AI project.</p>
+</div>
+<span class="text-label-xs font-label-xs text-outline ml-2 mt-1 block">10:30 AM</span>
+</div>
+</div>
+<div class="flex justify-end">
+<div class="max-w-[70%] flex flex-col items-end">
+<div class="bg-primary-container text-surface-container-lowest rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-sm">
+<p class="text-body-md font-body-md leading-relaxed">Great! I mainly handle Angular and C#.</p>
+</div>
+<span class="text-label-xs font-label-xs text-outline mr-2 mt-1 block">10:32 AM</span>
+</div>
+</div>
+<div class="flex justify-start">
+<div class="max-w-[70%]">
+<div class="bg-surface-container-lowest text-on-surface rounded-2xl rounded-tl-sm px-4 py-2.5 shadow-sm border border-surface-variant">
+<p class="text-body-md font-body-md leading-relaxed">I can handle Python and AI.</p>
+</div>
+<span class="text-label-xs font-label-xs text-outline ml-2 mt-1 block">10:33 AM</span>
+</div>
+</div>
+<div class="flex justify-end">
+<div class="max-w-[70%] flex flex-col items-end">
+<div class="bg-primary-container text-surface-container-lowest rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-sm">
+<p class="text-body-md font-body-md leading-relaxed">Awesome! Let’s work together.</p>
+</div>
+<span class="text-label-xs font-label-xs text-outline mr-2 mt-1 block">10:35 AM</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-lowest border-t border-surface-variant">
+<form class="flex items-center gap-3" onsubmit="event.preventDefault()">
+<button class="p-2 rounded-lg text-outline hover:text-on-surface hover:bg-surface-bright transition-colors" title="Attach file" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="attach_file">attach_file</span>
+</button>
+<input class="flex-1 h-11 px-4 rounded-lg border border-surface-variant bg-surface-bright text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Type a message..." type="text">
+<button class="w-11 h-11 rounded-full bg-primary-container text-surface-container-lowest flex items-center justify-center shadow-sm hover:opacity-95 transition-all duration-150 active:scale-95 flex-shrink-0" title="Send message" type="submit">
+<span class="material-symbols-outlined text-[18px] translate-x-0.5" data-icon="send">send</span>
+</button>
+</form>
+</div>
+</section>
+</div>
+</main>
+<footer class="w-full bg-on-background border-t border-tertiary-container docked full-width bottom">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-8 max-w-[1440px] mx-auto gap-4">
+<div class="text-label-sm font-label-sm text-surface-container-highest">
+        © 2025 PartnerFinder AI. All rights reserved.
+      </div>
+<div class="flex items-center gap-6">
+<a class="text-label-sm font-label-sm text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Security</a>
+<a class="text-label-sm font-label-sm text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

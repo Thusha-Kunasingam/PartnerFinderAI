@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PartnerFinder AI - Rate Teammate</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-surface": "#213145",
+            "secondary": "#0058be",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "surface-bright": "#f8f9ff",
+            "surface-container": "#e5eeff",
+            "outline": "#7b7487",
+            "primary-fixed-dim": "#d2bbff",
+            "surface": "#f8f9ff",
+            "on-error": "#ffffff",
+            "primary": "#630ed4",
+            "on-primary-fixed": "#25005a",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#2170e4",
+            "on-primary-fixed-variant": "#5a00c6",
+            "secondary-fixed": "#d8e2ff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-secondary-fixed": "#001a42",
+            "surface-container-lowest": "#ffffff",
+            "error": "#ba1a1a",
+            "primary-fixed": "#eaddff",
+            "surface-container-low": "#eff4ff",
+            "outline-variant": "#ccc3d8",
+            "tertiary": "#474e64",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#ede0ff",
+            "tertiary-fixed-dim": "#bec6e0",
+            "tertiary-container": "#5e667d",
+            "surface-container-high": "#dce9ff",
+            "on-secondary-container": "#fefcff",
+            "background": "#f8f9ff",
+            "secondary-fixed-dim": "#adc6ff",
+            "surface-variant": "#d3e4fe",
+            "on-secondary-fixed-variant": "#004395",
+            "on-tertiary-fixed": "#131b2e",
+            "surface-dim": "#cbdbf5",
+            "surface-tint": "#732ee4",
+            "tertiary-fixed": "#dae2fd",
+            "inverse-primary": "#d2bbff",
+            "on-surface": "#0b1c30",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#d3e4fe",
+            "on-surface-variant": "#4a4455",
+            "primary-container": "#7c3aed",
+            "on-background": "#0b1c30",
+            "on-tertiary-container": "#dee5ff",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-lg": "1.25rem",
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "space-xl": "1.5rem",
+            "gutter": "1.5rem",
+            "space-md": "0.75rem"
+          },
+          "fontFamily": {
+            "code-sm": ["JetBrains Mono"],
+            "body-lg": ["Inter"],
+            "label-xs": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-md": ["Inter"]
+          },
+          "fontSize": {
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-xs": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar (Shared Component) -->
+<header class="w-full bg-on-background dark:bg-on-background border-b border-tertiary-container dark:border-tertiary-container shadow-sm dark:shadow-none docked full-width top z-50">
+<div class="flex justify-between items-center w-full px-8 max-w-[1440px] mx-auto h-16">
+<!-- Brand Logo -->
+<a class="text-headline-md font-headline-md font-bold text-surface-container-lowest dark:text-surface-container-lowest flex items-center gap-2 tracking-tight" href="#">
+<span class="material-symbols-outlined text-primary-fixed text-2xl" data-icon="hub">hub</span>
+        PartnerFinder AI
+      </a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-surface-container-highest dark:text-surface-container-highest font-normal hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Home</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest font-normal hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">How It Works</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest font-normal hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Success Stories</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-surface-container-lowest dark:text-surface-container-lowest font-medium hover:text-primary-fixed transition-colors duration-150 text-label-md font-label-md px-3 py-1.5 transition-all active:scale-[0.98]" type="button">
+          Login
+        </button>
+<button class="bg-primary text-on-primary hover:brightness-105 font-medium px-4 py-2 rounded text-label-md font-label-md transition-all active:scale-[0.98] shadow-sm" type="button">
+          Register
+        </button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 flex items-center justify-center py-12 px-4 sm:px-6">
+<!-- Teammate Review Card (Around 560px - 600px width, 12px rounded corners, subtle shadow, 1px border) -->
+<div class="w-full max-w-[580px] bg-surface-container-lowest rounded-xl border border-[#E2E8F0] shadow-[0_1px_3px_0_rgba(15,23,42,0.05),0_1px_2px_-1px_rgba(15,23,42,0.03)] p-8">
+<!-- Card Heading -->
+<div class="mb-6">
+<h1 class="text-headline-md font-headline-md text-on-surface">Rate Teammate</h1>
+</div>
+<!-- Teammate Profile Header -->
+<div class="flex items-center gap-4 pb-6 mb-6 border-b border-[#F1F5F9]">
+<!-- Circular avatar with initials "NP" -->
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/40 flex items-center justify-center text-primary font-headline-sm font-semibold shrink-0">KT</div>
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm text-on-surface leading-tight">K.Thulaanchan</span>
+<span class="text-tertiary text-label-md font-label-md mt-0.5">Software Engineering Student</span>
+</div>
+</div>
+<!-- Rating Criteria Rows -->
+<div class="space-y-4 mb-6">
+<!-- Communication: 5 stars -->
+<div class="flex items-center justify-between py-1">
+<span class="text-label-md font-label-md text-on-surface">Communication</span>
+<div class="flex items-center gap-1 text-[#f59e0b]">
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<!-- Technical Skills: 4 stars -->
+<div class="flex items-center justify-between py-1">
+<span class="text-label-md font-label-md text-on-surface">Technical Skills</span>
+<div class="flex items-center gap-1 text-[#f59e0b]">
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+</div>
+<!-- Teamwork: 5 stars -->
+<div class="flex items-center justify-between py-1">
+<span class="text-label-md font-label-md text-on-surface">Teamwork</span>
+<div class="flex items-center gap-1 text-[#f59e0b]">
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<!-- Reliability: 4 stars -->
+<div class="flex items-center justify-between py-1">
+<span class="text-label-md font-label-md text-on-surface">Reliability</span>
+<div class="flex items-center gap-1 text-[#f59e0b]">
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+</div>
+</div>
+<!-- Review Section -->
+<div class="mb-6">
+<label class="block text-headline-sm font-headline-sm text-on-surface mb-2" for="review-comments">
+          Your Review
+        </label>
+<textarea class="w-full bg-surface-container-lowest border border-[#E2E8F0] rounded-lg p-3 text-body-md font-body-md text-on-surface focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 focus:outline-none transition-all placeholder:text-[#94A3B8] resize-none" id="review-comments" rows="4">Very helpful teammate. Great technical skills and good communication.</textarea>
+</div>
+<!-- Submit Review Action -->
+<div>
+<button class="w-full h-[42px] rounded-lg text-white font-label-md text-label-md bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] hover:brightness-105 hover:shadow-[0_4px_14px_0_rgba(124,58,237,0.35)] transition-all active:scale-[0.99] flex items-center justify-center" type="button">
+          Submit Review
+        </button>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full bg-on-background dark:bg-on-background border-t border-tertiary-container dark:border-tertiary-container flat no shadows docked full-width bottom mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-8 max-w-[1440px] mx-auto gap-4">
+<div class="text-headline-sm font-headline-sm font-bold text-surface-container-lowest dark:text-surface-container-lowest">
+        PartnerFinder AI
+      </div>
+<div class="flex flex-wrap items-center justify-center gap-6">
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Privacy Policy</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Terms of Service</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Security</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Help Center</a>
+</div>
+<div class="text-surface-container-highest dark:text-surface-container-highest text-body-sm font-body-sm">
+        © 2025 PartnerFinder AI. All rights reserved.
+      </div>
+</div>
+</footer>
+
+
+</body></html>

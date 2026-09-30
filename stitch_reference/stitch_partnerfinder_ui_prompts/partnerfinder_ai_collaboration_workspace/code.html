@@ -1,0 +1,392 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PartnerFinder AI - Collaboration Workspace</title>
+<!-- Material Symbols Outlined font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Inter & JetBrains Mono Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN with forms and container-queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-surface": "#213145",
+            "surface": "#f8f9ff",
+            "secondary-fixed": "#d8e2ff",
+            "inverse-primary": "#d2bbff",
+            "primary-container": "#7c3aed",
+            "background": "#f8f9ff",
+            "on-surface": "#0b1c30",
+            "on-tertiary-fixed": "#131b2e",
+            "tertiary-fixed-dim": "#bec6e0",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-error": "#ffffff",
+            "primary-fixed-dim": "#d2bbff",
+            "tertiary-fixed": "#dae2fd",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "error-container": "#ffdad6",
+            "surface-variant": "#d3e4fe",
+            "primary": "#630ed4",
+            "surface-tint": "#732ee4",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#004395",
+            "on-primary-fixed": "#25005a",
+            "surface-container-low": "#eff4ff",
+            "secondary-container": "#2170e4",
+            "surface-bright": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#ede0ff",
+            "surface-dim": "#cbdbf5",
+            "on-tertiary-container": "#dee5ff",
+            "error": "#ba1a1a",
+            "secondary": "#0058be",
+            "primary-fixed": "#eaddff",
+            "on-error-container": "#93000a",
+            "tertiary": "#474e64",
+            "on-surface-variant": "#4a4455",
+            "surface-container-high": "#dce9ff",
+            "outline": "#7b7487",
+            "outline-variant": "#ccc3d8",
+            "secondary-fixed-dim": "#adc6ff",
+            "on-secondary-fixed": "#001a42",
+            "on-primary-fixed-variant": "#5a00c6",
+            "on-background": "#0b1c30",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#5e667d",
+            "surface-container-highest": "#d3e4fe",
+            "on-secondary-container": "#fefcff",
+            "surface-container": "#e5eeff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-xl": "1.5rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem",
+            "margin": "2rem",
+            "space-lg": "1.25rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "label-xs": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "label-xs": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-gradient-btn {
+      background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .custom-gradient-btn:hover {
+      filter: brightness(108%);
+      box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar (Shared Component from JSON) -->
+<header class="bg-on-background dark:bg-on-background border-b border-tertiary-container dark:border-tertiary-container shadow-sm dark:shadow-none w-full sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-8 max-w-[1440px] mx-auto h-16">
+<!-- Brand Logo / Product Name -->
+<a class="text-headline-md font-headline-md font-bold text-surface-container-lowest dark:text-surface-container-lowest flex items-center gap-2 hover:opacity-90 transition-opacity" href="#">
+<span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary-container to-secondary-container flex items-center justify-center text-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="hub">hub</span>
+</span>
+<span class="">PartnerFinder AI</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-surface-container-highest dark:text-surface-container-highest font-normal hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Home</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest font-normal hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">How It Works</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest font-normal hover:text-surface-container-lowest dark:hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Success Stories</a>
+</nav>
+<!-- Trailing Action Buttons -->
+<div class="flex items-center gap-3">
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest font-medium text-label-md font-label-md px-4 py-2 rounded-lg transition-all duration-150 active:scale-[0.98]" href="#">Login</a>
+<a class="custom-gradient-btn text-surface-container-lowest font-medium text-label-md font-label-md px-4 py-2 rounded-lg transition-all duration-150 active:scale-[0.98]" href="#">Register</a>
+</div>
+</div>
+</header>
+<!-- Workspace Canvas -->
+<main class="flex-1 py-10 px-6 sm:px-8 max-w-[1440px] w-full mx-auto flex flex-col items-center justify-start">
+<!-- Centered Workspace Card Container (~1000px max width) -->
+<div class="w-full max-w-[1000px] bg-surface-container-lowest rounded-xl border border-outline-variant/50 shadow-sm overflow-hidden flex flex-col transition-all">
+<!-- 1. Workspace Header -->
+<div class="p-6 md:p-8 border-b border-surface-container">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="space-y-2">
+<!-- Breadcrumb / Badge -->
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-surface-container text-tertiary">
+<span class="material-symbols-outlined text-[14px]" data-icon="folder_managed">folder_managed</span>
+                Project Workspace
+              </span>
+<span class="text-outline text-body-sm font-body-sm">•</span>
+<span class="text-outline text-body-sm font-body-sm">Created 3 days ago</span>
+</div>
+<!-- Title & Status Badge -->
+<div class="flex flex-wrap items-center gap-3">
+<h1 class="text-display-lg font-display-lg text-on-surface tracking-tight">AI Event Assistant</h1>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-label-sm font-label-sm bg-primary-fixed text-primary font-medium border border-primary-fixed-dim/60">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                In Progress • 6 Weeks Duration
+              </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-2xl">
+              Real-time intelligent attendee matchmaking and interactive scheduling copilot powered by hybrid LLM vectors.
+            </p>
+</div>
+<!-- Header Right Actions -->
+<div class="flex items-center gap-3 self-start md:self-center shrink-0">
+<!-- Outlined Project Settings Button -->
+<button class="h-[42px] px-4 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-bright hover:border-outline font-label-md text-label-md flex items-center gap-2 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px] text-tertiary" data-icon="settings">settings</span>
+<span class="">Project Settings</span>
+</button>
+<!-- Primary Purple Action Button -->
+<button class="custom-gradient-btn h-[42px] px-5 rounded-lg text-surface-container-lowest font-label-md text-label-md flex items-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="person_add">person_add</span>
+<span class="">+ Add Member</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 2. Navigation Tabs Bar -->
+<div class="px-6 md:px-8 border-b border-surface-container bg-surface-bright flex items-center gap-8 overflow-x-auto">
+<!-- Overview (Inactive) -->
+<button class="py-4 text-label-md font-label-md text-on-surface-variant hover:text-on-surface border-b-2 border-transparent transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]" data-icon="dashboard">dashboard</span>
+<span class="">Overview</span>
+</button>
+<!-- Tasks (Inactive with Badge) -->
+<button class="py-4 text-label-md font-label-md text-on-surface-variant hover:text-on-surface border-b-2 border-transparent transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="">Tasks</span>
+<span class="px-2 py-0.5 rounded-full text-label-xs font-label-xs bg-surface-container-high text-on-surface-variant">8</span>
+</button>
+<!-- Members (ACTIVE Tab with Purple Indicator) -->
+<button class="py-4 text-label-md font-label-md text-primary font-semibold border-b-2 border-primary-container transition-colors flex items-center gap-2 relative">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="">Members</span>
+<span class="px-2 py-0.5 rounded-full text-label-xs font-label-xs bg-primary-fixed text-primary font-semibold">4</span>
+</button>
+<!-- Files (Inactive with Badge) -->
+<button class="py-4 text-label-md font-label-md text-on-surface-variant hover:text-on-surface border-b-2 border-transparent transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="folder">folder</span>
+<span class="">Files</span>
+<span class="px-2 py-0.5 rounded-full text-label-xs font-label-xs bg-surface-container-high text-on-surface-variant">3</span>
+</button>
+</div>
+<!-- 3. Active Tab Content ("Members" Tab) -->
+<div class="p-6 md:p-8 flex flex-col gap-6">
+<!-- Section Header Summary -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-surface-container">
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Team Members (4)</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Collaborate and coordinate roles on AI Event Assistant</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-xs font-label-xs text-tertiary">Match Compatibility: <strong class="text-primary font-semibold">96% High Alignment</strong></span>
+</div>
+</div>
+<!-- Member List Container (Structured Cards Grid) -->
+<div class="space-y-3">
+<!-- Member 1: Thusha Perera (Lead) -->
+<div class="p-4 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-bright/80 hover:border-outline-variant transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
+<div class="flex items-start md:items-center gap-4">
+<!-- Avatar Circle -->
+<div class="w-11 h-11 rounded-full bg-primary-fixed border border-primary-fixed-dim flex items-center justify-center text-primary font-bold text-label-md shrink-0 shadow-sm">KT</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2.5 flex-wrap">
+<span class="text-headline-sm font-headline-sm text-on-surface">K.Thusha</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-primary text-on-primary font-semibold">
+                    Project Lead (You)
+                  </span>
+<!-- Active Status Pill -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    Active
+                  </span>
+</div>
+<!-- Skills / Responsibilities Pills -->
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">Frontend</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">Angular</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">TypeScript</span>
+</div>
+</div>
+</div>
+<!-- Actions / Status -->
+<div class="flex items-center gap-2 self-end md:self-center">
+<span class="inline-flex items-center gap-1 text-label-xs font-label-xs text-primary font-semibold px-3 py-1.5 bg-primary-fixed/40 rounded-lg">
+<span class="material-symbols-outlined text-[16px]" data-icon="stars">stars</span>
+                Lead Owner
+              </span>
+<button class="w-9 h-9 rounded-lg border border-outline-variant flex items-center justify-center text-tertiary hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Member 2: Nimal Perera -->
+<div class="p-4 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-bright/80 hover:border-outline-variant transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
+<div class="flex items-start md:items-center gap-4">
+<!-- Avatar Circle -->
+<div class="w-11 h-11 rounded-full bg-secondary-fixed text-secondary font-bold text-label-md flex items-center justify-center shrink-0 border border-secondary-fixed-dim shadow-sm">KT</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2.5 flex-wrap">
+<span class="text-headline-sm font-headline-sm text-on-surface">K.Thulaanchan</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-surface-container text-tertiary font-medium">
+                    Collaborator
+                  </span>
+<!-- Active Status Pill -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    Active
+                  </span>
+</div>
+<!-- Skills / Responsibilities Pills -->
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">Backend</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">Python</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">AI / Fast-API</span>
+</div>
+</div>
+</div>
+<!-- Actions / Status -->
+<div class="flex items-center gap-2 self-end md:self-center">
+<button class="h-9 px-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-bright text-on-surface text-label-sm font-label-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="chat">chat</span>
+<span class="">Message</span>
+</button>
+<button class="w-9 h-9 rounded-lg border border-outline-variant flex items-center justify-center text-tertiary hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Member 3: Sarah Ahmed -->
+<div class="p-4 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-bright/80 hover:border-outline-variant transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
+<div class="flex items-start md:items-center gap-4">
+<!-- Avatar Circle -->
+<div class="w-11 h-11 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-bold text-label-md flex items-center justify-center shrink-0 border border-tertiary-fixed-dim shadow-sm">VV</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2.5 flex-wrap">
+<span class="text-headline-sm font-headline-sm text-on-surface">V.Vishanan</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-surface-container text-tertiary font-medium">
+                    Collaborator
+                  </span>
+<!-- Active Status Pill -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    Active
+                  </span>
+</div>
+<!-- Skills / Responsibilities Pills -->
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">Product Design</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">UI/UX</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">Figma</span>
+</div>
+</div>
+</div>
+<!-- Actions / Status -->
+<div class="flex items-center gap-2 self-end md:self-center">
+<button class="h-9 px-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-bright text-on-surface text-label-sm font-label-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="chat">chat</span>
+<span class="">Message</span>
+</button>
+<button class="w-9 h-9 rounded-lg border border-outline-variant flex items-center justify-center text-tertiary hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<div class="p-4 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-bright/80 hover:border-outline-variant transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm"><div class="flex items-start md:items-center gap-4"><div class="w-11 h-11 rounded-full bg-primary-fixed text-primary font-bold text-label-md flex items-center justify-center shrink-0 border border-primary-fixed-dim shadow-sm">SP</div><div class="space-y-1"><div class="flex items-center gap-2.5 flex-wrap"><span class="text-headline-sm font-headline-sm text-on-surface">S.Priyanka</span><span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-surface-container text-tertiary font-medium">Collaborator</span><span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-emerald-50 text-emerald-700 border border-emerald-200"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Active</span></div><div class="flex flex-wrap items-center gap-1.5 pt-0.5"><span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">Data Science</span><span class="px-2.5 py-0.5 rounded-full text-label-xs font-label-xs bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim/60 font-medium">Machine Learning</span></div></div></div><div class="flex items-center gap-2 self-end md:self-center"><button class="h-9 px-3.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-bright text-on-surface text-label-sm font-label-sm flex items-center gap-1.5 transition-colors"><span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="chat">chat</span><span class="">Message</span></button><button class="w-9 h-9 rounded-lg border border-outline-variant flex items-center justify-center text-tertiary hover:text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px] data-icon=" more_vert"="">more_vert</span></button></div></div></div>
+<!-- 4. Bottom Action / Collaboration Quick Summary -->
+<div class="mt-4 pt-4 border-t border-surface-container flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- Inset Milestone Alert Box -->
+<div class="w-full md:flex-1 p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="flag">flag</span>
+</span>
+<div class="text-body-sm font-body-sm text-on-surface">
+<span class="font-semibold text-on-surface">Next Milestone:</span> API Integration &amp; Prototype Review — <span class="text-primary font-medium">Due in 5 days</span>
+</div>
+</div>
+<!-- Secondary Link Invite Trigger -->
+<button class="w-full md:w-auto h-[42px] px-5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-bright hover:border-outline font-label-md text-label-md flex items-center justify-center gap-2 shrink-0 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="link">link</span>
+<span class="">Invite Partner via Link</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component from JSON) -->
+<footer class="bg-on-background dark:bg-on-background border-t border-tertiary-container dark:border-tertiary-container w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-8 max-w-[1440px] mx-auto gap-4">
+<!-- Copyright text & Logo -->
+<div class="flex items-center gap-3">
+<span class="text-headline-sm font-headline-sm font-bold text-surface-container-lowest dark:text-surface-container-lowest">PartnerFinder AI</span>
+<span class="text-tertiary hidden sm:inline">•</span>
+<p class="text-surface-container-highest dark:text-surface-container-highest text-body-sm font-body-sm">
+          © 2025 PartnerFinder AI. All rights reserved.
+        </p>
+</div>
+<!-- Footer Navigation Links -->
+<div class="flex items-center gap-6">
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest text-label-sm font-label-sm transition-colors duration-150" href="#">Privacy Policy</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest text-label-sm font-label-sm transition-colors duration-150" href="#">Terms of Service</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest text-label-sm font-label-sm transition-colors duration-150" href="#">Security</a>
+<a class="text-surface-container-highest dark:text-surface-container-highest hover:text-surface-container-lowest dark:hover:text-surface-container-lowest text-label-sm font-label-sm transition-colors duration-150" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+
+
+
+
+</body></html>

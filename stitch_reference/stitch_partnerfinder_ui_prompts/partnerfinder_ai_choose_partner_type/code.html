@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PartnerFinder AI - Choose Partner Type</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#0b1c30",
+            "on-tertiary-container": "#dee5ff",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-fixed": "#dae2fd",
+            "on-secondary-fixed": "#001a42",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed-dim": "#adc6ff",
+            "primary-container": "#7c3aed",
+            "surface-tint": "#732ee4",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "inverse-surface": "#213145",
+            "on-secondary-container": "#fefcff",
+            "primary-fixed-dim": "#d2bbff",
+            "secondary-container": "#2170e4",
+            "on-primary-fixed": "#25005a",
+            "on-surface-variant": "#4a4455",
+            "on-primary-container": "#ede0ff",
+            "surface-container-low": "#eff4ff",
+            "on-surface": "#0b1c30",
+            "surface-variant": "#d3e4fe",
+            "surface-container-highest": "#d3e4fe",
+            "primary-fixed": "#eaddff",
+            "surface-container-high": "#dce9ff",
+            "on-primary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary-container": "#5e667d",
+            "outline-variant": "#ccc3d8",
+            "outline": "#7b7487",
+            "surface-container": "#e5eeff",
+            "secondary": "#0058be",
+            "error": "#ba1a1a",
+            "surface-dim": "#cbdbf5",
+            "secondary-fixed": "#d8e2ff",
+            "surface": "#f8f9ff",
+            "on-secondary-fixed-variant": "#004395",
+            "error-container": "#ffdad6",
+            "primary": "#630ed4",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed-dim": "#bec6e0",
+            "background": "#f8f9ff",
+            "on-tertiary-fixed": "#131b2e",
+            "surface-bright": "#f8f9ff",
+            "on-error-container": "#93000a",
+            "inverse-primary": "#d2bbff",
+            "on-primary-fixed-variant": "#5a00c6",
+            "tertiary": "#474e64"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "space-xl": "1.5rem",
+            "space-lg": "1.25rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-xs": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "display-lg": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-sm": ["Inter"]
+          },
+          "fontSize": {
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-xs": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary-container selection:text-surface-container-lowest">
+<!-- TopNavBar (Shared Component) -->
+<header class="w-full bg-on-background shadow-sm z-50">
+<div class="flex justify-between items-center w-full px-8 max-w-[1440px] mx-auto h-16">
+<div class="text-headline-md font-headline-md font-bold text-surface-container-lowest flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="hub">hub</span>
+<span>PartnerFinder AI</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Home</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">How It Works</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Success Stories</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-surface-container-lowest hover:text-primary-fixed font-label-md text-label-md px-4 py-2 transition-all duration-150 active:scale-[0.98]" type="button">
+          Login
+        </button>
+<button class="bg-gradient-to-r from-primary-container to-secondary-container text-surface-container-lowest font-label-md text-label-md px-5 py-2 rounded-lg transition-all duration-150 active:scale-[0.98] shadow-sm hover:brightness-105" type="button">
+          Register
+        </button>
+</div>
+</div>
+</header>
+<!-- Center Container: Desktop Onboarding Screen -->
+<main class="flex-1 flex items-center justify-center py-10 px-6">
+<div class="w-full max-w-[960px] bg-surface-container-lowest border border-surface-container rounded-xl p-8 md:p-10 shadow-sm">
+<!-- Header Area -->
+<div class="text-center mb-8">
+<h1 class="text-display-lg font-display-lg text-on-surface mb-2">Choose Partner Type</h1>
+<p class="text-body-lg font-body-lg text-tertiary">What kind of partner are you looking for?</p>
+</div>
+<!-- Five Selectable Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-6 gap-5 mb-10">
+<!-- 1. Study Partner (Span 2) -->
+<div class="md:col-span-2 bg-surface-container-lowest border border-[#E2E8F0] rounded-xl p-6 flex flex-col justify-between transition-all duration-150 cursor-pointer hover:border-[#CBD5E1] hover:shadow-sm">
+<div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-low border border-surface-container flex items-center justify-center mb-4 text-primary-container">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-1">Study Partner</h2>
+<p class="text-body-md font-body-md text-tertiary">Learn together and improve your skills</p>
+</div>
+</div>
+<!-- 2. Project Partner (CRITICAL STATE: SELECTED) (Span 2) -->
+<div class="md:col-span-2 relative bg-[#f3efff] border-2 border-primary-container rounded-xl p-6 flex flex-col justify-between shadow-sm cursor-pointer">
+<div class="absolute top-4 right-4 w-6 h-6 rounded-full bg-primary-container text-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-sm font-bold" data-icon="check">check</span>
+</div>
+<div>
+<div class="w-11 h-11 rounded-lg bg-primary-container text-surface-container-lowest flex items-center justify-center mb-4 shadow-sm">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-1">Project Partner</h2>
+<p class="text-body-md font-body-md text-tertiary">Build amazing projects together</p>
+</div>
+</div>
+<!-- 3. Hackathon Team (Span 2) -->
+<div class="md:col-span-2 bg-surface-container-lowest border border-[#E2E8F0] rounded-xl p-6 flex flex-col justify-between transition-all duration-150 cursor-pointer hover:border-[#CBD5E1] hover:shadow-sm">
+<div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-low border border-surface-container flex items-center justify-center mb-4 text-primary-container">
+<span class="material-symbols-outlined" data-icon="emoji_events">emoji_events</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-1">Hackathon Team</h2>
+<p class="text-body-md font-body-md text-tertiary">Compete and build a team</p>
+</div>
+</div>
+<!-- 4. Skill Exchange (Span 3 centered row) -->
+<div class="md:col-span-3 bg-surface-container-lowest border border-[#E2E8F0] rounded-xl p-6 flex flex-col justify-between transition-all duration-150 cursor-pointer hover:border-[#CBD5E1] hover:shadow-sm">
+<div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-low border border-surface-container flex items-center justify-center mb-4 text-primary-container">
+<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-1">Skill Exchange</h2>
+<p class="text-body-md font-body-md text-tertiary">Teach what you know, learn what you need</p>
+</div>
+</div>
+<!-- 5. Startup Partner (Span 3 centered row) -->
+<div class="md:col-span-3 bg-surface-container-lowest border border-[#E2E8F0] rounded-xl p-6 flex flex-col justify-between transition-all duration-150 cursor-pointer hover:border-[#CBD5E1] hover:shadow-sm">
+<div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-low border border-surface-container flex items-center justify-center mb-4 text-primary-container">
+<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-1">Startup Partner</h2>
+<p class="text-body-md font-body-md text-tertiary">Find co-founders and build ideas</p>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Actions -->
+<div class="flex items-center justify-between pt-4 border-t border-surface-container">
+<button class="h-[42px] px-6 rounded-lg bg-surface-container-lowest border border-[#E2E8F0] text-on-surface font-label-md text-label-md hover:bg-surface-container-low hover:border-[#CBD5E1] transition-all duration-150 active:scale-[0.98]" type="button">
+          Back
+        </button>
+<button class="h-[42px] px-8 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-surface-container-lowest font-label-md text-label-md shadow-sm hover:brightness-108 transition-all duration-150 active:scale-[0.98]" type="button">
+          Next
+        </button>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full bg-on-background">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-8 max-w-[1440px] mx-auto gap-4 md:gap-0">
+<div class="text-body-sm font-body-sm text-surface-container-highest">
+        © 2025 PartnerFinder AI. All rights reserved.
+      </div>
+<div class="flex items-center gap-6 text-label-sm font-label-sm">
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Privacy Policy</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Terms of Service</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Security</a>
+<a class="text-surface-container-highest hover:text-surface-container-lowest transition-colors duration-150" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</body></html>

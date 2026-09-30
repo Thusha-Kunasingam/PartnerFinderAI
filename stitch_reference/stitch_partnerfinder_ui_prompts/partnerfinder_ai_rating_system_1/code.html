@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PartnerFinder AI - Rate Your Teammate</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#eff4ff",
+            "tertiary-fixed-dim": "#bec6e0",
+            "on-background": "#0b1c30",
+            "on-secondary-container": "#fefcff",
+            "tertiary": "#474e64",
+            "surface-container": "#e5eeff",
+            "primary-fixed": "#eaddff",
+            "outline": "#7b7487",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#dce9ff",
+            "outline-variant": "#ccc3d8",
+            "on-primary-container": "#ede0ff",
+            "secondary-container": "#2170e4",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-tint": "#732ee4",
+            "surface-container-highest": "#d3e4fe",
+            "on-tertiary-fixed": "#131b2e",
+            "on-surface-variant": "#4a4455",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "primary": "#630ed4",
+            "on-primary-fixed": "#25005a",
+            "on-primary": "#ffffff",
+            "surface-dim": "#cbdbf5",
+            "primary-container": "#7c3aed",
+            "surface-variant": "#d3e4fe",
+            "secondary": "#0058be",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#5a00c6",
+            "tertiary-container": "#5e667d",
+            "on-secondary-fixed-variant": "#004395",
+            "inverse-primary": "#d2bbff",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "secondary-fixed": "#d8e2ff",
+            "surface-bright": "#f8f9ff",
+            "secondary-fixed-dim": "#adc6ff",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#213145",
+            "on-surface": "#0b1c30",
+            "on-tertiary-container": "#dee5ff",
+            "surface": "#f8f9ff",
+            "primary-fixed-dim": "#d2bbff",
+            "tertiary-fixed": "#dae2fd",
+            "on-secondary-fixed": "#001a42",
+            "background": "#f8f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.25rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem",
+            "margin": "2rem",
+            "gutter": "1.5rem",
+            "space-xl": "1.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "display-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-xs": ["Inter"]
+          },
+          "fontSize": {
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-xs": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .star-filled {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      color: #F59E0B;
+    }
+    .star-empty {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      color: #CBD5E1;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col justify-between antialiased">
+<!-- Top Navigation Bar (Shared Component JSON Blueprint) -->
+<header class="w-full bg-on-background border-b border-tertiary-container shadow-sm">
+<div class="flex justify-between items-center w-full px-8 max-w-[1440px] mx-auto h-16">
+<div class="flex items-center gap-8">
+<a class="text-headline-md font-headline-md font-bold text-surface-container-lowest flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="auto_awesome" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="">PartnerFinder AI</span>
+</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Home</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">How It Works</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-md font-label-md" href="#">Success Stories</a>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-surface-container-highest hover:text-surface-container-lowest transition-all duration-150 active:scale-[0.98] text-label-md font-label-md px-3 py-2" type="button">
+          Login
+        </button>
+<button class="bg-primary-container text-surface-container-lowest hover:bg-primary transition-all duration-150 active:scale-[0.98] text-label-md font-label-md px-4 py-2 rounded-lg font-medium shadow-sm" type="button">
+          Register
+        </button>
+</div>
+</div>
+</header>
+<!-- Main Content Evaluation View -->
+<main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6">
+<section class="w-full max-w-[620px] bg-surface-container-lowest border border-surface-container-highest rounded-xl shadow-sm p-6 sm:p-8">
+<!-- Card Header -->
+<div class="mb-6">
+<div class="flex items-center justify-between gap-4 mb-1">
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Rate Your Teammate</h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low text-primary border border-surface-variant text-label-xs font-label-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+            Verified Match
+          </span>
+</div>
+<p class="text-body-md font-body-md text-tertiary">
+          Share feedback about your collaboration on AI Event Assistant to help improve match quality.
+        </p>
+</div>
+<!-- Partner Info Badge / Micro-Card -->
+<div class="bg-surface-container-low border border-surface-container-high rounded-lg p-4 mb-6 flex items-center justify-between flex-wrap gap-3">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-full bg-primary-container text-surface-container-lowest flex items-center justify-center font-bold text-headline-sm font-headline-sm shadow-sm ring-2 ring-primary-fixed">KT</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">K.Thulaanchan</h2>
+<span class="inline-flex items-center text-label-xs font-label-xs px-2 py-0.5 rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant">
+                Partner
+              </span>
+</div>
+<p class="text-body-sm font-body-sm text-tertiary mt-0.5">
+              Backend &amp; AI Developer • University of Jaffna
+            </p>
+</div>
+</div>
+<div class="w-full sm:w-auto text-left sm:text-right">
+<span class="inline-block text-label-xs font-label-xs bg-surface-container-lowest border border-surface-container-high text-secondary px-2.5 py-1 rounded-full font-medium">
+            Project: AI Event Assistant (Completed)
+          </span>
+</div>
+</div>
+<!-- Rating Criteria Rows -->
+<div class="space-y-4 mb-6">
+<!-- Criteria 1: Communication -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-surface-container-low gap-2">
+<div>
+<span class="text-label-md font-label-md text-on-surface block">Communication</span>
+<span class="text-body-sm font-body-sm text-tertiary">Promptness, responsiveness, and clear discussions</span>
+</div>
+<div class="flex items-center gap-2 self-start sm:self-center">
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface w-7 text-right">5.0</span>
+</div>
+</div>
+<!-- Criteria 2: Technical Skills -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-surface-container-low gap-2">
+<div>
+<span class="text-label-md font-label-md text-on-surface block">Technical Skills</span>
+<span class="text-body-sm font-body-sm text-tertiary">Quality of code, problem-solving, and implementation</span>
+</div>
+<div class="flex items-center gap-2 self-start sm:self-center">
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-empty" data-icon="star">star</span>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface w-7 text-right">4.0</span>
+</div>
+</div>
+<!-- Criteria 3: Teamwork -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-surface-container-low gap-2">
+<div>
+<span class="text-label-md font-label-md text-on-surface block">Teamwork</span>
+<span class="text-body-sm font-body-sm text-tertiary">Collaboration, openness to feedback, and team spirit</span>
+</div>
+<div class="flex items-center gap-2 self-start sm:self-center">
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface w-7 text-right">5.0</span>
+</div>
+</div>
+<!-- Criteria 4: Reliability & Timeliness -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 gap-2">
+<div>
+<span class="text-label-md font-label-md text-on-surface block">Reliability &amp; Timeliness</span>
+<span class="text-body-sm font-body-sm text-tertiary">Meeting milestone deadlines and fulfilling commitments</span>
+</div>
+<div class="flex items-center gap-2 self-start sm:self-center">
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-filled" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined star-empty" data-icon="star">star</span>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface w-7 text-right">4.0</span>
+</div>
+</div>
+</div>
+<!-- Overall Rating Summary Callout -->
+<div class="flex items-center justify-between bg-surface-container-high/60 border border-surface-container-highest px-4 py-2.5 rounded-lg mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="insights">insights</span>
+<span class="text-label-md font-label-md text-on-surface font-semibold">Calculated Score</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container text-surface-container-lowest text-label-sm font-label-sm font-medium shadow-sm">
+<span class="">Overall Rating: 4.5 / 5.0</span>
+</div>
+</div>
+<!-- Feedback & Review Input -->
+<div class="mb-5">
+<label class="block text-label-md font-label-md text-on-surface mb-1.5" for="review-textarea">
+          Your Review (Optional)
+        </label>
+<div class="relative">
+<textarea class="w-full text-body-md font-body-md text-on-surface bg-surface-container-lowest border border-surface-container-highest rounded-lg p-3 placeholder:text-outline focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all resize-none" id="review-textarea" placeholder="Share specific details about what went well, communication style, or advice for future collaborators..." rows="4">K.Thulaanchan was exceptional at delivering the FastAPI backend and integrating our LLM embeddings ahead of schedule. Great communication throughout our 6-week sprint!</textarea>
+<div class="flex justify-end mt-1.5">
+<span class="text-code-sm font-code-sm text-tertiary" id="char-counter">150 / 500 characters</span>
+</div>
+</div>
+</div>
+<!-- Checkbox Option -->
+<div class="mb-6 pt-1">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input checked="" class="mt-0.5 h-[18px] w-[18px] rounded border-outline text-primary-container focus:ring-primary-container cursor-pointer transition-colors" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Allow this review to be displayed publicly on K.Thulaanchan's partner profile</span>
+</label>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 pt-2 border-t border-surface-container-low">
+<button class="w-full sm:w-auto h-[42px] px-5 rounded-lg border border-surface-container-highest text-on-surface bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-150 text-label-md font-label-md font-medium active:scale-[0.98] text-center" type="button">
+          Skip for Now
+        </button>
+<button class="w-full sm:w-auto h-[42px] px-6 rounded-lg bg-primary-container hover:bg-primary text-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-150 text-label-md font-label-md font-medium active:scale-[0.98] text-center flex items-center justify-center gap-2" type="button">
+<span class="">Submit Review</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="send">send</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component JSON Blueprint) -->
+<footer class="w-full bg-on-background border-t border-tertiary-container">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-8 max-w-[1440px] mx-auto gap-4">
+<div class="flex flex-col md:flex-row items-center gap-4">
+<span class="text-headline-sm font-headline-sm font-bold text-surface-container-lowest">
+          PartnerFinder AI
+        </span>
+<span class="text-body-sm font-body-sm text-surface-container-highest">
+          © 2025 PartnerFinder AI. All rights reserved.
+        </span>
+</div>
+<div class="flex items-center gap-6">
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Privacy Policy</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Terms of Service</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Security</a>
+<a class="text-surface-container-highest font-normal hover:text-surface-container-lowest transition-colors duration-150 text-label-sm font-label-sm" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+<script>
+    // Lightweight interaction for the review character count
+    const textarea = document.getElementById('review-textarea');
+    const counter = document.getElementById('char-counter');
+    if (textarea && counter) {
+      textarea.addEventListener('input', (e) => {
+        const len = e.target.value.length;
+        counter.textContent = `${len} / 500 characters`;
+      });
+    }
+  </script>
+
+
+</body></html>
