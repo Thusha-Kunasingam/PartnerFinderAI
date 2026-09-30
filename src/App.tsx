@@ -37,11 +37,13 @@ export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes */}
+        {/* Standalone Auth Routes (Centered cards on #f8f9ff, matching Stitch) */}
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Public Routes with Global Dark Header & Footer */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
 
           {/* Focused Matching & Connection Flow Pages */}
           <Route path="/requirements/new" element={<PartnerRequirementFormPage />} />

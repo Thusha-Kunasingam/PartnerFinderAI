@@ -1,153 +1,351 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { PrimaryButton } from '../../components/common/PrimaryButton';
-import { SecondaryButton } from '../../components/common/SecondaryButton';
-
-const partnerCategories = [
-  {
-    type: 'Study Partner',
-    icon: 'menu_book',
-    desc: 'Prepare for exams, course modules, or certifications with dedicated study companions.',
-  },
-  {
-    type: 'Project Partner',
-    icon: 'rocket_launch',
-    desc: 'Build ambitious web, mobile, and AI software applications with complementary engineering skills.',
-  },
-  {
-    type: 'Hackathon Team',
-    icon: 'emoji_events',
-    desc: 'Form high-performing multidisciplinary squads to win fast-paced hackathons and sprint challenges.',
-  },
-  {
-    type: 'Skill Exchange',
-    icon: 'swap_horiz',
-    desc: 'Teach frameworks you have mastered and learn cutting-edge tools in peer-to-peer exchanges.',
-  },
-  {
-    type: 'Startup Partner',
-    icon: 'lightbulb',
-    desc: 'Find technical co-founders and visionary operators to launch early-stage ventures.',
-  },
-];
-
-const howItWorksSteps = [
-  { step: '1', title: 'Create Profile', icon: 'badge', desc: 'Share your background, institutions, technical skills, and collaboration goals.' },
-  { step: '2', title: 'Define Requirements', icon: 'person_search', desc: 'Specify project deadlines, tech stack, and weekly hours commitments.' },
-  { step: '3', title: 'AI Matchmaking', icon: 'handshake', desc: 'Our algorithmic engine analyzes skills, availability, and interests to find the ideal match.' },
-  { step: '4', title: 'Connect & Build', icon: 'trending_up', desc: 'Launch a shared workspace, track milestone progress, and build portfolio projects.' },
-];
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MaterialIcon } from '../../components/common/MaterialIcon';
 
 export const LandingPage: React.FC = () => {
+  const navigate = useNavigate();
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
+  const categories = [
+    {
+      title: 'Study Partner',
+      desc: 'Learn together and master coursework',
+      icon: 'school',
+      iconBg: 'bg-[#eaddff]/50 text-[#630ed4]',
+    },
+    {
+      title: 'Project Partner',
+      desc: 'Build portfolio-ready projects together',
+      icon: 'code',
+      iconBg: 'bg-[#d8e2ff]/50 text-[#0058be]',
+    },
+    {
+      title: 'Hackathon Team',
+      desc: 'Form winning teams for hackathons',
+      icon: 'emoji_events',
+      iconBg: 'bg-[#eaddff]/50 text-[#630ed4]',
+    },
+    {
+      title: 'Skill Exchange',
+      desc: 'Teach what you know, learn what you need',
+      icon: 'swap_horiz',
+      iconBg: 'bg-[#d8e2ff]/50 text-[#0058be]',
+    },
+    {
+      title: 'Startup Partner',
+      desc: 'Find co-founders and launch new ideas',
+      icon: 'rocket_launch',
+      iconBg: 'bg-[#eaddff]/50 text-[#630ed4]',
+    },
+  ];
+
+  const popularSkills = [
+    'Python',
+    'Angular',
+    'Machine Learning',
+    'UI/UX',
+    'C#',
+    'SQL',
+    'React',
+    'Flutter',
+    'Data Science',
+  ];
+
+  const recentlyJoined = [
+    {
+      initials: 'KT',
+      name: 'K.Thulaanchan',
+      school: 'Stanford University',
+      color: 'text-[#630ed4]',
+      candidateId: 'cand-001',
+    },
+    {
+      initials: 'VV',
+      name: 'V.Vishanan',
+      school: 'MIT',
+      color: 'text-[#0058be]',
+      candidateId: 'cand-002',
+    },
+    {
+      initials: 'SP',
+      name: 'S.Priyanka',
+      school: 'UC Berkeley',
+      color: 'text-[#7c3aed]',
+      candidateId: 'cand-003',
+    },
+  ];
+
   return (
-    <div className="flex flex-col w-full">
-      {/* Hero Section */}
-      <section className="py-20 md:py-28 px-6 text-center max-w-5xl mx-auto flex flex-col items-center">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-fixed border border-primary-fixed-dim text-primary text-label-sm font-semibold mb-6">
-          <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
-          <span>AI-Powered Matchmaking Engine v4.2</span>
-        </div>
-
-        <h1 className="text-4xl md:text-6xl font-bold font-sans text-on-surface tracking-tight max-w-4xl leading-tight">
-          Find the right person to learn,{' '}
-          <span className="bg-gradient-to-r from-primary-container to-secondary-container bg-clip-text text-transparent">
-            build and grow
-          </span>{' '}
-          with.
-        </h1>
-
-        <p className="text-body-lg text-on-surface-variant max-w-2xl mt-6">
-          Connect with vetted students, engineers, and designers for hackathons, study sessions,
-          and production-grade projects powered by algorithmic intelligence.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-          <Link to="/register">
-            <PrimaryButton icon="arrow_forward" iconPosition="right" className="h-12 px-7 text-base">
-              Find a Partner
-            </PrimaryButton>
-          </Link>
-          <a href="#how-it-works">
-            <SecondaryButton icon="play_circle" iconPosition="left" className="h-12 px-6 text-base">
-              How It Works
-            </SecondaryButton>
-          </a>
-        </div>
-      </section>
-
-      {/* Categories Grid */}
-      <section className="py-16 px-6 bg-surface-container-lowest border-y border-border-standard">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-headline-lg font-headline-lg font-bold text-on-surface">
-              What kind of partner are you looking for?
-            </h2>
-            <p className="text-body-md text-on-surface-variant mt-2">
-              Select your collaboration mode to match with targeted collaborators.
+    <div className="w-full flex-1 flex flex-col items-center bg-[#f8f9ff]">
+      {/* Hero Section (Dark navy-to-purple background block) */}
+      <section
+        id="home"
+        className="w-full bg-gradient-to-r from-[#0b1c30] via-[#131b2e] to-[#25005a] border-b border-slate-800 text-white py-12 px-8"
+      >
+        <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-6 items-center">
+          {/* Left Text Cluster */}
+          <div className="col-span-12 lg:col-span-7 flex flex-col justify-center space-y-5">
+            <h1 className="text-[32px] md:text-[40px] font-bold text-white tracking-tight leading-tight">
+              Find the right person to learn,{' '}
+              <span className="text-purple-400">build and grow</span> with.
+            </h1>
+            <p className="text-[16px] text-[#dce9ff] max-w-xl">
+              Connect with students, developers and creators for study, projects, hackathons and
+              more.
             </p>
+            <div className="flex items-center gap-4 pt-2">
+              <button
+                onClick={() => navigate('/register')}
+                className="h-[42px] px-[18px] rounded-lg bg-gradient-to-r from-[#7c3aed] to-[#2170e4] text-white text-[14px] font-medium shadow-md hover:brightness-105 transition-all active:scale-[0.98] flex items-center gap-2 cursor-pointer"
+                type="button"
+              >
+                <span>Find a Partner</span>
+                <MaterialIcon icon="arrow_forward" size={18} />
+              </button>
+              <button
+                onClick={() => setIsVideoModalOpen(true)}
+                className="h-[42px] px-4 rounded-lg border border-slate-400 text-white hover:bg-white/10 text-[14px] font-medium transition-all active:scale-[0.98] flex items-center gap-2 cursor-pointer"
+                type="button"
+              >
+                <MaterialIcon icon="play_circle" size={18} />
+                <span>Watch Video</span>
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
-            {partnerCategories.map((cat) => (
-              <Link
-                key={cat.type}
-                to={`/register?type=${encodeURIComponent(cat.type)}`}
-                className="p-6 rounded-xl border border-border-standard bg-surface-container-lowest hover:border-primary-container hover:shadow-elevation-2 transition-all flex flex-col items-center text-center group cursor-pointer"
-              >
-                <div className="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary group-hover:bg-primary-fixed group-hover:text-primary transition-colors mb-4">
-                  <span className="material-symbols-outlined text-[24px]">{cat.icon}</span>
-                </div>
-                <h3 className="text-headline-sm font-semibold text-on-surface mb-2">{cat.type}</h3>
-                <p className="text-body-sm text-on-surface-variant leading-relaxed">{cat.desc}</p>
-              </Link>
-            ))}
+          {/* Right Side Illustration Container */}
+          <div className="col-span-12 lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="w-full max-w-[480px] h-[310px] rounded-xl overflow-hidden border border-slate-700/60 shadow-2xl relative bg-[#0b1c30]">
+              <img
+                alt="Collaborative university students using PartnerFinder AI"
+                className="w-full h-full object-cover object-center"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1tynpzKKdWQ08o8m37xatFM4IpVemjOC7t5OJujpiVnhoEwBPuXDyitnKF7zr5BDgVIVr9Q8f1i1cSDqhPB53NNb2t56EsN0p7NheOz5edcOOrURqU84HPMs7yUzjzal6gTvV4HqqlPnV9aKiaAjvCCBOs8DnbjrzLAZftEAzJtoAc6JClq8f4Y7ub5e8q4kK2QUf1oyMvYzF_qWKbGznIg7NJiIl-L8zz-20v7HtRxBGWF1x-cIayQ"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How It Works Steps */}
-      <section id="how-it-works" className="py-20 px-6 max-w-7xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="text-headline-lg font-headline-lg font-bold text-on-surface">
-            How it works?
-          </h2>
-          <p className="text-body-md text-on-surface-variant mt-2">
-            From initial requirement definition to active project workspace in minutes.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {howItWorksSteps.map((step) => (
+      {/* Five Cards Section Directly Below Hero */}
+      <section className="w-full px-8 py-10 max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {categories.map((cat) => (
             <div
-              key={step.step}
-              className="p-6 rounded-xl border border-border-standard bg-surface-container-lowest shadow-elevation-1 flex flex-col"
+              key={cat.title}
+              onClick={() => navigate(`/register?type=${encodeURIComponent(cat.title)}`)}
+              className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-150 flex flex-col cursor-pointer hover:border-[#7c3aed]/40"
             >
-              <div className="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-label-md mb-4 shadow-sm">
-                {step.step}
+              <div
+                className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${cat.iconBg}`}
+              >
+                <MaterialIcon icon={cat.icon} size={22} />
               </div>
-              <h3 className="text-headline-sm font-semibold text-on-surface mb-2">{step.title}</h3>
-              <p className="text-body-sm text-on-surface-variant leading-relaxed">{step.desc}</p>
+              <h3 className="text-[16px] font-semibold text-[#0b1c30] mb-1">{cat.title}</h3>
+              <p className="text-[12px] text-[#474e64]">{cat.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <section className="py-16 px-6 bg-nav-rail text-white text-center">
-        <div className="max-w-3xl mx-auto flex flex-col items-center">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Ready to build your next breakthrough project?
+      {/* How it works? Section */}
+      <section
+        className="w-full px-8 py-10 max-w-[1440px] mx-auto border-t border-slate-200"
+        id="how-it-works"
+      >
+        <div className="mb-8">
+          <h2 className="text-[24px] font-semibold text-[#0b1c30] tracking-tight">
+            How it works?
           </h2>
-          <p className="text-surface-container-highest text-body-lg mb-8 max-w-xl">
-            Join vetted collaborators from top universities and tech communities today.
+          <p className="text-[14px] text-[#474e64]">
+            A direct three-step progression to start collaborating immediately.
           </p>
-          <Link to="/register">
-            <PrimaryButton className="h-12 px-8 text-base">
-              Get Started for Free
-            </PrimaryButton>
-          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+          {/* Step 1 */}
+          <div
+            onClick={() => navigate('/register')}
+            className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col relative cursor-pointer hover:border-[#0b1c30]/40 transition-colors"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="w-8 h-8 rounded-full bg-[#0b1c30] text-white flex items-center justify-center font-bold text-[12px]">
+                1
+              </span>
+              <MaterialIcon icon="badge" size={20} className="text-slate-400" />
+            </div>
+            <h3 className="text-[16px] font-semibold text-[#0b1c30] mb-1">Create Profile</h3>
+            <p className="text-[14px] text-[#474e64]">
+              List your target goals, universities, and technical skillset.
+            </p>
+          </div>
+
+          {/* Step 2 */}
+          <div
+            onClick={() => navigate('/matches')}
+            className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col relative cursor-pointer hover:border-[#630ed4]/40 transition-colors"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="w-8 h-8 rounded-full bg-[#630ed4] text-white flex items-center justify-center font-bold text-[12px]">
+                2
+              </span>
+              <MaterialIcon icon="person_search" size={20} className="text-slate-400" />
+            </div>
+            <h3 className="text-[16px] font-semibold text-[#0b1c30] mb-1">Find Partners</h3>
+            <p className="text-[14px] text-[#474e64]">
+              AI calculates skill affinity and matches mutual requirements.
+            </p>
+          </div>
+
+          {/* Step 3 */}
+          <div
+            onClick={() => navigate('/workspace/ai-event-assistant')}
+            className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col relative cursor-pointer hover:border-[#0058be]/40 transition-colors"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="w-8 h-8 rounded-full bg-[#0058be] text-white flex items-center justify-center font-bold text-[12px]">
+                3
+              </span>
+              <MaterialIcon icon="handshake" size={20} className="text-slate-400" />
+            </div>
+            <h3 className="text-[16px] font-semibold text-[#0b1c30] mb-1">
+              Connect & Collaborate
+            </h3>
+            <p className="text-[14px] text-[#474e64]">
+              Initiate workspace chats, plan milestones, and ship together.
+            </p>
+          </div>
         </div>
       </section>
+
+      {/* Bottom Section: 3 Clean Columns (Popular Skills, Recently Joined, Success Stories) */}
+      <section
+        className="w-full px-8 py-10 max-w-[1440px] mx-auto border-t border-slate-200 mb-6"
+        id="success-stories"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Area 1: Popular Skills */}
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col">
+            <div className="flex items-center gap-2 mb-4">
+              <MaterialIcon icon="trending_up" size={20} className="text-[#630ed4]" />
+              <h3 className="text-[16px] font-semibold text-[#0b1c30]">Popular Skills</h3>
+            </div>
+            <div className="flex flex-wrap gap-2 pt-1">
+              {popularSkills.map((skill) => (
+                <span
+                  key={skill}
+                  onClick={() => navigate(`/matches?skill=${encodeURIComponent(skill)}`)}
+                  className="h-[24px] px-2.5 rounded-full bg-[#E0F2FE] border border-[#BAE6FD] text-[#0284C7] text-[12px] font-medium flex items-center cursor-pointer hover:bg-[#BAE6FD]/40 transition-colors"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Area 2: Recently Joined */}
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col">
+            <div className="flex items-center gap-2 mb-4">
+              <MaterialIcon icon="group" size={20} className="text-[#0058be]" />
+              <h3 className="text-[16px] font-semibold text-[#0b1c30]">Recently Joined</h3>
+            </div>
+            <div className="space-y-3">
+              {recentlyJoined.map((student) => (
+                <div
+                  key={student.name}
+                  onClick={() => navigate(`/candidates/${student.candidateId}`)}
+                  className="flex items-center gap-3 cursor-pointer p-1.5 rounded-lg hover:bg-slate-50 transition-colors"
+                >
+                  <div
+                    className={`w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-[12px] ${student.color}`}
+                  >
+                    {student.initials}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[14px] font-medium text-[#0b1c30] truncate">
+                      {student.name}
+                    </p>
+                    <span className="inline-block text-[11px] font-medium text-[#474e64] bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
+                      {student.school}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Area 3: Success Stories */}
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <MaterialIcon icon="format_quote" size={20} className="text-purple-600" />
+                <h3 className="text-[16px] font-semibold text-[#0b1c30]">Success Stories</h3>
+              </div>
+              <p className="text-[14px] text-[#474e64] italic leading-relaxed">
+                "Through PartnerFinder AI, I matched with an ML engineer from Georgia Tech in under
+                24 hours. Together, we designed and shipped our neural model for the global health
+                AI challenge."
+              </p>
+            </div>
+            <div className="pt-4 border-t border-slate-100 mt-4 flex items-center justify-between">
+              <div>
+                <p className="text-[14px] font-medium text-[#0b1c30]">Elena Rostova</p>
+                <p className="text-[11px] text-[#474e64]">CS & AI Student Researcher</p>
+              </div>
+              <span className="text-[11px] px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
+                1st Place AI Hackathon
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Video Preview Modal */}
+      {isVideoModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+          <div className="bg-[#0b1c30] text-white border border-slate-700 rounded-2xl p-6 max-w-lg w-full shadow-2xl relative">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-700">
+              <div className="flex items-center gap-2">
+                <MaterialIcon icon="play_circle" size={22} className="text-purple-400" />
+                <h4 className="text-[16px] font-bold">PartnerFinder AI Platform Demo</h4>
+              </div>
+              <button
+                onClick={() => setIsVideoModalOpen(false)}
+                className="text-slate-400 hover:text-white text-lg cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="my-6 aspect-video bg-slate-900 rounded-xl border border-slate-800 flex flex-col items-center justify-center p-6 text-center">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#7c3aed] to-[#2170e4] flex items-center justify-center text-white mb-3 shadow-lg">
+                <MaterialIcon icon="play_arrow" size={28} />
+              </div>
+              <p className="text-[14px] font-medium text-[#dce9ff]">
+                Interactive Matchmaking & Collaboration Walkthrough
+              </p>
+              <p className="text-[12px] text-slate-400 mt-1">
+                See how algorithmic pairing and workspace milestone management work in practice.
+              </p>
+            </div>
+            <div className="flex justify-end gap-3 pt-2 border-t border-slate-800">
+              <button
+                onClick={() => setIsVideoModalOpen(false)}
+                className="px-4 py-2 rounded-lg border border-slate-600 text-slate-300 hover:bg-slate-800 text-[14px] cursor-pointer"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => {
+                  setIsVideoModalOpen(false);
+                  navigate('/register');
+                }}
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#7c3aed] to-[#2170e4] text-white text-[14px] font-medium hover:brightness-105 cursor-pointer"
+              >
+                Get Started Now
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
