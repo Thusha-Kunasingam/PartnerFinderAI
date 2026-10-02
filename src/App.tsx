@@ -53,6 +53,7 @@ export const App: React.FC = () => {
           <Route path="/matches/:candidateId/explanation" element={<MatchExplanationPage />} />
           <Route path="/connections/request/:candidateId" element={<SendConnectionRequestModal />} />
           <Route path="/connections/success/:candidateId" element={<ConnectionSuccessPage />} />
+          <Route path="/connections/requests" element={<ConnectionRequestsPage />} />
 
           {/* Workspace Views */}
           <Route path="/workspace/:projectId" element={<CollaborationWorkspacePage />} />

@@ -9,14 +9,21 @@ interface ConnectionState {
   acceptedConnectionIds: string[];
   activeTab: 'received' | 'sent';
   setActiveTab: (tab: 'received' | 'sent') => void;
-  sendRequest: (recipientId: string, recipientName: string, projectName: string, message: string) => void;
+  sendRequest: (
+    recipientId: string,
+    recipientName: string,
+    projectName: string,
+    message: string
+  ) => void;
   acceptRequest: (requestId: string) => void;
   rejectRequest: (requestId: string) => void;
+  cancelSentRequest: (requestId: string) => void;
+  hasSentRequest: (candidateId: string) => boolean;
 }
 
 export const useConnectionStore = create<ConnectionState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       receivedRequests: initialConnectionRequests.filter((r) => r.recipientId === 'user-thusha'),
       sentRequests: initialConnectionRequests.filter((r) => r.senderId === 'user-thusha'),
       acceptedConnectionIds: ['k-thulaanchan', 'v-vishanan'],
@@ -26,6 +33,17 @@ export const useConnectionStore = create<ConnectionState>()(
 
       sendRequest: (recipientId, recipientName, projectName, message) =>
         set((state) => {
+          // Check if already sent
+          const existing = state.sentRequests.find((r) => r.recipientId === recipientId);
+          if (existing) {
+            // Update message if exists
+            return {
+              sentRequests: state.sentRequests.map((r) =>
+                r.recipientId === recipientId ? { ...r, message, createdAt: 'Just now' } : r
+              ),
+            };
+          }
+
           const newReq: ConnectionRequest = {
             id: `req-${Date.now()}`,
             senderId: 'user-thusha',
@@ -33,7 +51,7 @@ export const useConnectionStore = create<ConnectionState>()(
             senderInitials: 'KT',
             recipientId,
             projectId: 'ai-event-assistant',
-            projectName,
+            projectName: projectName || 'AI Event Assistant',
             projectDuration: '6 Weeks',
             skillsNeeded: ['Python', 'AI'],
             message,
@@ -49,7 +67,9 @@ export const useConnectionStore = create<ConnectionState>()(
           const acceptedId = req ? req.senderId : '';
           return {
             receivedRequests: state.receivedRequests.filter((r) => r.id !== requestId),
-            acceptedConnectionIds: acceptedId ? [...state.acceptedConnectionIds, acceptedId] : state.acceptedConnectionIds,
+            acceptedConnectionIds: acceptedId && !state.acceptedConnectionIds.includes(acceptedId)
+              ? [...state.acceptedConnectionIds, acceptedId]
+              : state.acceptedConnectionIds,
           };
         }),
 
@@ -57,6 +77,15 @@ export const useConnectionStore = create<ConnectionState>()(
         set((state) => ({
           receivedRequests: state.receivedRequests.filter((r) => r.id !== requestId),
         })),
+
+      cancelSentRequest: (requestId) =>
+        set((state) => ({
+          sentRequests: state.sentRequests.filter((r) => r.id !== requestId),
+        })),
+
+      hasSentRequest: (candidateId) => {
+        return get().sentRequests.some((r) => r.recipientId === candidateId);
+      },
     }),
     {
       name: 'partnerfinder-connections',
