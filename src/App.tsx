@@ -48,6 +48,7 @@ export const App: React.FC = () => {
           {/* Focused Matching & Connection Flow Pages */}
           <Route path="/requirements/new" element={<PartnerRequirementFormPage />} />
           <Route path="/matching/processing" element={<MatchingProcessingPage />} />
+          <Route path="/matches" element={<MatchingResultsPage />} />
           <Route path="/candidates/:candidateId" element={<CandidateProfilePage />} />
           <Route path="/matches/:candidateId/explanation" element={<MatchExplanationPage />} />
           <Route path="/connections/request/:candidateId" element={<SendConnectionRequestModal />} />
@@ -71,7 +72,6 @@ export const App: React.FC = () => {
         {/* Authenticated Application Shell Routes (260px SideNavRail + 64px TopCommandBar) */}
         <Route element={<AppShellLayout />}>
           <Route path="/dashboard" element={<UserDashboardPage />} />
-          <Route path="/matches" element={<MatchingResultsPage />} />
           <Route path="/connections/requests" element={<ConnectionRequestsPage />} />
           <Route path="/messages" element={<ChatPage />} />
         </Route>

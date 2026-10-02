@@ -1,87 +1,132 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProgressBar } from '../../components/common/ProgressBar';
-import { ProcessingStepRow } from '../../components/feedback/ProcessingStepRow';
+import { useMatchingStore } from '../../stores/useMatchingStore';
+import { MaterialIcon } from '../../components/common/MaterialIcon';
 
-const steps = [
-  'Checking skills',
-  'Checking interests',
-  'Checking availability',
-  'Checking project requirements',
-  'Calculating compatibility',
+const processingSteps = [
+  '1. Checking skills',
+  '2. Checking interests',
+  '3. Checking availability',
+  '4. Checking project requirements',
+  '5. Calculating compatibility',
 ];
 
 export const MatchingProcessingPage: React.FC = () => {
   const navigate = useNavigate();
-  const [progress, setProgress] = useState(15);
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const { matches, setIsProcessing, setProcessingProgress } = useMatchingStore();
+
+  const [activeStep, setActiveStep] = useState(1);
+  const [progressPercent, setProgressPercent] = useState(20);
+  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
+    setIsProcessing(true);
+
+    const stepInterval = setInterval(() => {
+      setActiveStep((prev) => {
+        if (prev >= 5) {
+          clearInterval(stepInterval);
+          setProgressPercent(100);
+          setIsDone(true);
+          setProcessingProgress(100);
+
           setTimeout(() => {
+            setIsProcessing(false);
             navigate('/matches');
-          }, 800);
-          return 100;
+          }, 900);
+          return 5;
         }
-        const next = prev + 20;
-        setCurrentStepIndex(Math.min(steps.length - 1, Math.floor(next / 20)));
+
+        const next = prev + 1;
+        const newProgress = Math.min(100, next * 20);
+        setProgressPercent(newProgress);
+        setProcessingProgress(newProgress);
         return next;
       });
-    }, 500);
+    }, 450);
 
-    return () => clearInterval(timer);
-  }, [navigate]);
+    return () => clearInterval(stepInterval);
+  }, [navigate, setIsProcessing, setProcessingProgress]);
+
+  const candidateCount = matches.length || 8;
 
   return (
-    <div className="flex-1 flex items-center justify-center p-6 py-12">
-      <div className="w-full max-w-[640px] bg-surface-container-lowest border border-border-standard rounded-2xl p-10 shadow-elevation-1 text-center">
-        {/* Animated AI Icon */}
-        <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-primary-fixed text-primary mb-6 shadow-sm">
-          <span className="material-symbols-outlined text-[40px] animate-pulse">
-            smart_toy
-          </span>
-          <span className="absolute -inset-1 rounded-2xl bg-primary-container/20 animate-ping" />
+    <div className="flex-1 w-full max-w-[1440px] mx-auto flex items-center justify-center py-12 px-4 sm:px-6">
+      {/* Processing Container Card (700px wide, 12px radius, Level 1 shadow) */}
+      <div className="w-full max-w-[700px] bg-white rounded-xl border border-slate-200 shadow-sm p-8 sm:p-10 flex flex-col items-center">
+        {/* Purple AI Sparkle / Robot Icon */}
+        <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-5 border border-purple-100 text-[#7C3AED]">
+          <MaterialIcon icon="smart_toy" size={24} />
         </div>
 
-        <h1 className="text-headline-lg font-headline-lg font-bold text-on-surface mb-2">
+        {/* Heading */}
+        <h1 className="text-[24px] leading-8 font-semibold text-[#0b1c30] text-center mb-2">
           Finding the best partners for you...
         </h1>
-        <p className="text-body-md text-on-surface-variant max-w-md mx-auto mb-8">
-          Our algorithmic engine is analyzing your requirements and finding the most suitable candidates.
+
+        {/* Subtitle */}
+        <p className="text-[14px] text-slate-500 text-center max-w-lg mb-8">
+          Our AI is analyzing your requirements and finding the most suitable people.
         </p>
 
-        {/* 5-Step Checklist Card */}
-        <div className="bg-surface-container-low border border-surface-container-high rounded-xl p-5 mb-6 text-left">
-          {steps.map((label, index) => {
-            const isCompleted = index < currentStepIndex || progress === 100;
-            const isInProgress = index === currentStepIndex && progress < 100;
+        {/* Exactly Five Status Rows */}
+        <div className="w-full space-y-3 mb-8 bg-slate-50/70 p-5 rounded-lg border border-slate-100">
+          {processingSteps.map((stepText, index) => {
+            const stepNum = index + 1;
+            const isCompleted = stepNum <= activeStep || isDone;
 
             return (
-              <ProcessingStepRow
-                key={label}
-                stepNumber={index + 1}
-                label={label}
-                isCompleted={isCompleted}
-                isInProgress={isInProgress}
-              />
+              <React.Fragment key={stepText}>
+                <div className="flex items-center justify-between py-1.5">
+                  <span className="text-[14px] text-slate-700 font-medium">
+                    {stepText}
+                  </span>
+                  {isCompleted ? (
+                    <div className="flex items-center gap-1.5 text-[#10B981]">
+                      <MaterialIcon icon="check_circle" size={18} />
+                      <span className="text-[12px] font-semibold">Completed</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5 text-slate-400">
+                      <span className="w-2 h-2 rounded-full bg-slate-300"></span>
+                      <span className="text-[12px]">Pending</span>
+                    </div>
+                  )}
+                </div>
+                {index < processingSteps.length - 1 && (
+                  <div className="h-px w-full bg-slate-200/60" />
+                )}
+              </React.Fragment>
             );
           })}
         </div>
 
-        {/* Progress Bar & Status */}
-        <div className="mb-4">
-          <ProgressBar progress={progress} showLabel />
+        {/* Horizontal Purple-to-Blue Progress Bar */}
+        <div className="w-full mb-8">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-[12px] text-slate-500 font-medium">Progress</span>
+            <span className="text-[12px] text-[#7C3AED] font-semibold">
+              {progressPercent}%
+            </span>
+          </div>
+          <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/70">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] transition-all duration-300"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
         </div>
 
-        {progress === 100 && (
-          <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-label-md font-semibold flex items-center justify-center gap-2 animate-fade-in">
-            <span className="material-symbols-outlined text-[20px] text-emerald-600">verified</span>
-            <span>We found 8 potential partners! Preparing your results...</span>
+        {/* Bottom Notification Card Inside Container */}
+        <div className="w-full bg-[#ecfdf5] border border-[#a7f3d0] rounded-lg p-4 text-center">
+          <div className="flex items-center justify-center gap-2 text-[#059669] font-semibold text-[14px] mb-1">
+            <MaterialIcon icon="verified" size={18} />
+            <span>We found {candidateCount} potential partners!</span>
           </div>
-        )}
+          <p className="text-[12px] text-slate-600">
+            Preparing your results...
+          </p>
+        </div>
       </div>
     </div>
   );

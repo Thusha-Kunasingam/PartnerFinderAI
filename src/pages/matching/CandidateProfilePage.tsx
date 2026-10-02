@@ -1,255 +1,317 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { SecondaryButton } from '../../components/common/SecondaryButton';
-import { PrimaryButton } from '../../components/common/PrimaryButton';
-import { SkillPill } from '../../components/common/SkillPill';
 import { useMatchingStore } from '../../stores/useMatchingStore';
-import { useConnectionStore } from '../../stores/useConnectionStore';
-import { ModalContainer } from '../../components/feedback/ModalContainer';
-import { Textarea } from '../../components/common/Textarea';
-import { cn } from '../../utils/cn';
+import { MaterialIcon } from '../../components/common/MaterialIcon';
 
 export const CandidateProfilePage: React.FC = () => {
   const { candidateId } = useParams<{ candidateId: string }>();
   const navigate = useNavigate();
   const { matches } = useMatchingStore();
-  const { sendRequest } = useConnectionStore();
 
   const [activeTab, setActiveTab] = useState<'overview' | 'projects' | 'reviews'>('overview');
-  const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
-  const [connectMessage, setConnectMessage] = useState(
-    "Hi, I would love to connect and explore collaborating together on an upcoming project!"
-  );
 
-  const candidate = matches.find((m) => m.candidateId === candidateId) || matches[0];
+  const candidate =
+    matches.find((m) => m.candidateId === candidateId) || matches[0];
 
-  const handleSendConnect = () => {
-    sendRequest(
-      candidate.candidateId,
-      candidate.candidateName,
-      'AI Event Assistant',
-      connectMessage
+  if (!candidate) {
+    return (
+      <div className="flex-1 w-full max-w-[960px] mx-auto p-12 text-center">
+        <h2 className="text-[20px] font-semibold text-[#0b1c30]">Candidate Not Found</h2>
+        <button
+          onClick={() => navigate('/matches')}
+          className="mt-4 px-4 py-2 bg-[#7C3AED] text-white rounded-lg text-[14px]"
+        >
+          Back to Matches
+        </button>
+      </div>
     );
-    setIsConnectModalOpen(false);
-    navigate(`/connections/success/${candidate.candidateId}`);
-  };
+  }
 
   return (
-    <div className="w-full flex flex-col gap-6 max-w-5xl mx-auto">
-      {/* Back Button */}
-      <button
-        type="button"
-        onClick={() => navigate('/matches')}
-        className="self-start inline-flex items-center gap-2 text-label-md text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
-      >
-        <span className="material-symbols-outlined text-[20px]">arrow_back</span>
-        <span>Back to Matches</span>
-      </button>
+    <div className="flex-1 w-full max-w-[1440px] mx-auto px-8 py-8 flex flex-col items-center">
+      {/* Centered Card Container */}
+      <div className="w-full max-w-[960px] bg-white rounded-xl border border-[#d3e4fe] shadow-sm p-8">
+        {/* Back Link */}
+        <div className="mb-6">
+          <button
+            type="button"
+            onClick={() => navigate('/matches')}
+            className="inline-flex items-center gap-1.5 text-[14px] text-[#474e64] hover:text-[#630ed4] transition-colors cursor-pointer"
+          >
+            <MaterialIcon icon="arrow_back" size={18} />
+            <span>Back</span>
+          </button>
+        </div>
 
-      {/* Hero Profile Banner Card */}
-      <div className="p-6 md:p-8 rounded-xl bg-surface-container-lowest border border-border-standard shadow-elevation-1 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="flex items-center gap-5">
-          {candidate.avatarUrl ? (
-            <img
-              src={candidate.avatarUrl}
-              alt={candidate.candidateName}
-              className="w-20 h-20 rounded-full object-cover border-2 border-surface-container-high shadow-sm flex-shrink-0"
-            />
-          ) : (
-            <div className="w-20 h-20 rounded-full bg-surface-container-low border-2 border-surface-container-high flex items-center justify-center font-bold text-secondary text-2xl flex-shrink-0">
+        {/* Header Section: Candidate Identity & Actions */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-[#e5eeff]">
+          {/* Left: Avatar + Details */}
+          <div className="flex items-center gap-5">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#630ed4] to-[#0058be] flex items-center justify-center text-white text-[24px] font-bold shadow-sm shrink-0 ring-4 ring-[#eff4ff]">
               {candidate.initials}
             </div>
-          )}
-
-          <div className="flex flex-col">
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-on-surface">{candidate.candidateName}</h1>
-              <span className="px-2.5 py-0.5 rounded-full text-label-xs font-bold bg-primary-fixed text-primary border border-primary-fixed-dim">
-                {candidate.matchScore}% Match
-              </span>
+            <div>
+              <div className="flex items-center gap-3">
+                <h1 className="text-[24px] font-semibold text-[#0b1c30]">
+                  {candidate.candidateName}
+                </h1>
+                <button
+                  type="button"
+                  onClick={() => navigate(`/matches/${candidate.candidateId}/explanation`)}
+                  className="px-2.5 py-0.5 rounded-full bg-[#f3efff] border border-[#7C3AED]/30 text-[#7C3AED] text-[11px] font-bold hover:bg-[#7C3AED] hover:text-white transition-colors cursor-pointer flex items-center gap-1"
+                  title="View AI Match Explanation"
+                >
+                  <MaterialIcon icon="auto_awesome" size={13} />
+                  <span>{candidate.matchScore}% Match</span>
+                </button>
+              </div>
+              <p className="text-[14px] text-[#474e64] mt-0.5">{candidate.title}</p>
+              <div className="flex items-center gap-1.5 text-[12px] text-[#7b7487] mt-1">
+                <MaterialIcon icon="school" size={16} className="text-[#474e64]" />
+                <span>{candidate.university}</span>
+              </div>
             </div>
+          </div>
 
-            <p className="text-body-md text-on-surface-variant font-medium mt-1">
-              {candidate.title} • {candidate.university}
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 text-body-sm text-outline mt-2">
-              <span className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-[16px]">location_on</span>
-                {candidate.location}
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-[16px]">schedule</span>
-                {candidate.availabilityText}
-              </span>
-              <span className="flex items-center gap-1 text-amber-600 font-semibold">
-                <span className="material-symbols-outlined text-[16px] text-amber-500" style={{ fontVariationSettings: "'FILL' 1" }}>
-                  star
-                </span>
-                {candidate.rating} ({candidate.reviewsCount} reviews)
-              </span>
-            </div>
+          {/* Right: Actions */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => navigate('/messages')}
+              className="h-[42px] px-4 rounded-lg bg-white border border-[#ccc3d8] text-[#0b1c30] text-[14px] font-medium hover:bg-[#eff4ff] hover:border-[#5e667d] transition-all active:scale-[0.98] cursor-pointer"
+            >
+              Message
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate(`/connections/request/${candidate.candidateId}`)}
+              className="h-[42px] px-6 rounded-lg text-white text-[14px] font-medium active:scale-[0.98] flex items-center gap-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] hover:brightness-105 shadow-sm hover:shadow-[0_4px_14px_0_rgba(124,58,237,0.35)] transition-all cursor-pointer"
+            >
+              <MaterialIcon icon="person_add" size={18} />
+              <span>Connect</span>
+            </button>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <SecondaryButton
-            icon="chat"
-            iconPosition="left"
-            onClick={() => navigate('/messages')}
-          >
-            Message
-          </SecondaryButton>
-          <PrimaryButton
-            icon="person_add"
-            iconPosition="left"
-            onClick={() => setIsConnectModalOpen(true)}
-          >
-            Connect
-          </PrimaryButton>
+        {/* Navigation Tabs (Exactly 3 tabs) */}
+        <div className="border-b border-[#e5eeff] mt-2">
+          <nav className="flex gap-8 -mb-px">
+            <button
+              type="button"
+              onClick={() => setActiveTab('overview')}
+              className={`py-4 text-[14px] font-medium border-b-2 transition-colors flex items-center gap-2 cursor-pointer ${
+                activeTab === 'overview'
+                  ? 'text-[#630ed4] border-[#630ed4] font-semibold'
+                  : 'text-[#7b7487] hover:text-[#0b1c30] border-transparent'
+              }`}
+            >
+              Overview
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('projects')}
+              className={`py-4 text-[14px] font-medium border-b-2 transition-colors cursor-pointer ${
+                activeTab === 'projects'
+                  ? 'text-[#630ed4] border-[#630ed4] font-semibold'
+                  : 'text-[#7b7487] hover:text-[#0b1c30] border-transparent'
+              }`}
+            >
+              Projects
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('reviews')}
+              className={`py-4 text-[14px] font-medium border-b-2 transition-colors cursor-pointer ${
+                activeTab === 'reviews'
+                  ? 'text-[#630ed4] border-[#630ed4] font-semibold'
+                  : 'text-[#7b7487] hover:text-[#0b1c30] border-transparent'
+              }`}
+            >
+              Reviews
+            </button>
+          </nav>
         </div>
-      </div>
 
-      {/* Tabs */}
-      <div className="flex items-center gap-6 border-b border-border-standard">
-        {(['overview', 'projects', 'reviews'] as const).map((tab) => (
-          <button
-            key={tab}
-            type="button"
-            onClick={() => setActiveTab(tab)}
-            className={cn(
-              'pb-3.5 text-label-md font-label-md capitalize transition-all cursor-pointer border-b-2 -mb-px',
-              activeTab === tab
-                ? 'border-primary-container text-primary-container font-semibold'
-                : 'border-transparent text-on-surface-variant hover:text-on-surface font-medium'
-            )}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+        {/* Tab Content */}
+        {activeTab === 'overview' && (
+          <div className="pt-8 space-y-8">
+            {/* 1. About section */}
+            <section>
+              <h2 className="text-[16px] font-semibold text-[#0b1c30] mb-2">About</h2>
+              <p className="text-[14px] leading-relaxed text-[#4a4455]">
+                {candidate.bio}
+              </p>
+            </section>
 
-      {/* Tab Panels */}
-      {activeTab === 'overview' && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main 2-col Left */}
-          <div className="lg:col-span-2 flex flex-col gap-6">
-            {/* About Card */}
-            <div className="p-6 rounded-xl bg-surface-container-lowest border border-border-standard shadow-elevation-1">
-              <h2 className="text-headline-sm font-semibold text-on-surface mb-3">About</h2>
-              <p className="text-body-md text-on-surface-variant leading-relaxed">{candidate.bio}</p>
-            </div>
+            {/* 2. Skills section */}
+            <section>
+              <h2 className="text-[16px] font-semibold text-[#0b1c30] mb-3">Skills</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                {candidate.matchingTechStack.map((skill, idx) => {
+                  const level = idx === 0 ? 'Advanced' : 'Intermediate';
+                  const isAdv = level === 'Advanced';
 
-            {/* Skills Card */}
-            <div className="p-6 rounded-xl bg-surface-container-lowest border border-border-standard shadow-elevation-1">
-              <h2 className="text-headline-sm font-semibold text-on-surface mb-3">Skills</h2>
-              <div className="flex flex-wrap gap-2">
-                {candidate.matchingTechStack.map((tech) => (
-                  <SkillPill key={tech} label={tech} level="Advanced" />
-                ))}
-              </div>
-            </div>
-
-            {/* Previous Projects */}
-            <div className="p-6 rounded-xl bg-surface-container-lowest border border-border-standard shadow-elevation-1">
-              <h2 className="text-headline-sm font-semibold text-on-surface mb-4">Previous Projects</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(candidate.previousProjects || [
-                  { title: 'AI Chatbot', description: 'Context-aware customer service copilot with hybrid RAG.', tags: ['Python', 'FastAPI'] },
-                  { title: 'Student Management System', description: 'Role-based university portal handling course enrollment.', tags: ['Angular', 'C#'] },
-                ]).map((proj) => (
-                  <div key={proj.title} className="p-4 rounded-xl border border-border-standard bg-surface-container-low flex flex-col justify-between">
-                    <div>
-                      <h3 className="font-semibold text-label-md text-on-surface mb-1">{proj.title}</h3>
-                      <p className="text-body-sm text-on-surface-variant mb-3">{proj.description}</p>
-                    </div>
-                    <div className="flex flex-wrap gap-1">
-                      {proj.tags.map((t) => (
-                        <span key={t} className="text-[11px] px-2 py-0.5 rounded bg-surface-container-lowest border border-border-standard text-on-surface-variant font-medium">
-                          {t}
+                  return (
+                    <div
+                      key={skill}
+                      className="bg-[#eff4ff] border border-[#d3e4fe] rounded-lg p-3 flex flex-col justify-between"
+                    >
+                      <span className="text-[14px] font-medium text-[#0b1c30]">{skill}</span>
+                      <div className="mt-2 flex items-center gap-1.5">
+                        <span
+                          className={`w-2 h-2 rounded-full ${
+                            isAdv ? 'bg-emerald-500' : 'bg-[#2170e4]'
+                          }`}
+                        />
+                        <span
+                          className={`text-[12px] font-medium ${
+                            isAdv ? 'text-emerald-700' : 'text-[#0058be]'
+                          }`}
+                        >
+                          {level}
                         </span>
-                      ))}
+                      </div>
                     </div>
+                  );
+                })}
+              </div>
+            </section>
+
+            {/* 3. Interests section */}
+            <section>
+              <h2 className="text-[16px] font-semibold text-[#0b1c30] mb-3">Interests</h2>
+              <div className="flex flex-wrap gap-2">
+                {['Artificial Intelligence', 'Web Development', 'Automation', 'Distributed Systems'].map(
+                  (interest) => (
+                    <span
+                      key={interest}
+                      className="h-8 px-3.5 inline-flex items-center rounded-full bg-[#e5eeff] text-[#0058be] text-[12px] font-medium border border-[#d3e4fe]"
+                    >
+                      {interest}
+                    </span>
+                  )
+                )}
+              </div>
+            </section>
+
+            {/* 4. Availability section */}
+            <section>
+              <h2 className="text-[16px] font-semibold text-[#0b1c30] mb-3">Availability</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="flex items-center gap-2 p-2.5 rounded-lg bg-[#f8f9ff] border border-[#d3e4fe] text-[#0b1c30]">
+                  <MaterialIcon icon="calendar_today" size={18} className="text-[#630ed4]" />
+                  <span className="text-[12px]">Saturday</span>
+                </div>
+                <div className="flex items-center gap-2 p-2.5 rounded-lg bg-[#f8f9ff] border border-[#d3e4fe] text-[#0b1c30]">
+                  <MaterialIcon icon="calendar_today" size={18} className="text-[#630ed4]" />
+                  <span className="text-[12px]">Sunday</span>
+                </div>
+                <div className="flex items-center gap-2 p-2.5 rounded-lg bg-[#f8f9ff] border border-[#d3e4fe] text-[#0b1c30]">
+                  <MaterialIcon icon="schedule" size={18} className="text-[#630ed4]" />
+                  <span className="text-[12px]">6 PM - 9 PM</span>
+                </div>
+                <div className="flex items-center gap-2 p-2.5 rounded-lg bg-[#f8f9ff] border border-[#d3e4fe] text-[#0b1c30]">
+                  <MaterialIcon icon="location_on" size={18} className="text-[#630ed4]" />
+                  <span className="text-[12px]">Online / Jaffna</span>
+                </div>
+              </div>
+            </section>
+
+            {/* 5. Previous Projects section */}
+            <section>
+              <h2 className="text-[16px] font-semibold text-[#0b1c30] mb-3">Previous Projects</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {candidate.previousProjects && candidate.previousProjects.length > 0 ? (
+                  candidate.previousProjects.map((project, idx) => (
+                    <div
+                      key={project.title}
+                      className="p-4 rounded-lg bg-[#f8f9ff] border border-[#d3e4fe] flex items-center gap-3.5 hover:border-[#ccc3d8] transition-colors"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-[#dce9ff] text-[#630ed4] flex items-center justify-center shrink-0">
+                        <MaterialIcon icon={idx === 0 ? 'smart_toy' : 'groups'} size={22} />
+                      </div>
+                      <div>
+                        <h3 className="text-[16px] font-semibold text-[#0b1c30]">{project.title}</h3>
+                        <p className="text-[12px] text-[#474e64] mt-0.5">{project.description}</p>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="p-4 rounded-lg bg-[#f8f9ff] border border-[#d3e4fe] flex items-center gap-3.5">
+                      <div className="w-10 h-10 rounded-lg bg-[#dce9ff] text-[#630ed4] flex items-center justify-center shrink-0">
+                        <MaterialIcon icon="smart_toy" size={22} />
+                      </div>
+                      <h3 className="text-[16px] font-semibold text-[#0b1c30]">AI Chatbot</h3>
+                    </div>
+                    <div className="p-4 rounded-lg bg-[#f8f9ff] border border-[#d3e4fe] flex items-center gap-3.5">
+                      <div className="w-10 h-10 rounded-lg bg-[#dce9ff] text-[#630ed4] flex items-center justify-center shrink-0">
+                        <MaterialIcon icon="groups" size={22} />
+                      </div>
+                      <h3 className="text-[16px] font-semibold text-[#0b1c30]">Student Management System</h3>
+                    </div>
+                  </>
+                )}
+              </div>
+            </section>
+          </div>
+        )}
+
+        {activeTab === 'projects' && (
+          <div className="pt-8 space-y-4">
+            <h2 className="text-[16px] font-semibold text-[#0b1c30] mb-2">Verified Projects Portfolio</h2>
+            <div className="space-y-4">
+              {(candidate.previousProjects || [
+                {
+                  title: 'AI Chatbot Assistant',
+                  description: 'Full stack autonomous copilot built with FastAPI, LangChain, and React.',
+                  tags: ['Python', 'FastAPI', 'React', 'AI'],
+                },
+                {
+                  title: 'University Course Management Portal',
+                  description: 'Scalable multi-tenant academic portal with real-time grade notifications.',
+                  tags: ['Angular', 'C#', '.NET', 'SQL'],
+                },
+              ]).map((proj) => (
+                <div key={proj.title} className="p-5 rounded-lg border border-[#e5eeff] bg-[#f8f9ff]">
+                  <h3 className="text-[16px] font-bold text-[#0b1c30]">{proj.title}</h3>
+                  <p className="text-[14px] text-[#4a4455] mt-1">{proj.description}</p>
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {proj.tags?.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-0.5 rounded-full bg-[#e5eeff] text-[#0058be] text-[11px] font-medium"
+                      >
+                        {t}
+                      </span>
+                    ))}
                   </div>
-                ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'reviews' && (
+          <div className="pt-8 space-y-4">
+            <div className="flex items-center gap-4 p-5 rounded-lg bg-[#f8f9ff] border border-[#e5eeff]">
+              <div className="text-center px-4 border-r border-[#ccc3d8]">
+                <div className="text-[32px] font-bold text-[#0b1c30]">{candidate.rating}</div>
+                <div className="flex text-amber-500 justify-center">
+                  {'★'.repeat(5)}
+                </div>
+                <div className="text-[12px] text-[#7b7487] mt-1">{candidate.reviewsCount} reviews</div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-[16px] font-bold text-[#0b1c30]">Verified Peer Collaboration</h3>
+                <p className="text-[14px] text-[#4a4455] mt-1">
+                  100% of project teammates recommend collaborating with {candidate.candidateName}.
+                </p>
               </div>
             </div>
           </div>
-
-          {/* Right Column: Availability & Interests */}
-          <div className="flex flex-col gap-6">
-            <div className="p-6 rounded-xl bg-surface-container-lowest border border-border-standard shadow-elevation-1">
-              <h2 className="text-headline-sm font-semibold text-on-surface mb-3">Availability</h2>
-              <div className="flex items-center gap-2 text-body-md text-on-surface mb-2">
-                <span className="material-symbols-outlined text-[18px] text-primary">calendar_today</span>
-                <span>Saturdays & Sundays</span>
-              </div>
-              <div className="flex items-center gap-2 text-body-md text-on-surface mb-2">
-                <span className="material-symbols-outlined text-[18px] text-primary">schedule</span>
-                <span>15 hours per week</span>
-              </div>
-              <div className="flex items-center gap-2 text-body-md text-on-surface">
-                <span className="material-symbols-outlined text-[18px] text-primary">public</span>
-                <span>UTC+5:30 (Sri Lanka / Remote)</span>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-surface-container-lowest border border-border-standard shadow-elevation-1">
-              <h2 className="text-headline-sm font-semibold text-on-surface mb-3">Interests</h2>
-              <div className="flex flex-col gap-2 text-body-sm text-on-surface-variant">
-                <span>• Artificial Intelligence & LLM Fine-Tuning</span>
-                <span>• Distributed Systems & Cloud Microservices</span>
-                <span>• Hackathon MVP Sprints</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {activeTab === 'projects' && (
-        <div className="p-6 rounded-xl bg-surface-container-lowest border border-border-standard shadow-elevation-1">
-          <h2 className="text-headline-sm font-semibold text-on-surface mb-4">Featured Work & Repositories</h2>
-          <p className="text-body-md text-on-surface-variant">
-            Explore verified open source repositories and completed deliverables built by {candidate.candidateName}.
-          </p>
-        </div>
-      )}
-
-      {activeTab === 'reviews' && (
-        <div className="p-6 rounded-xl bg-surface-container-lowest border border-border-standard shadow-elevation-1">
-          <h2 className="text-headline-sm font-semibold text-on-surface mb-4">Teammate Reviews</h2>
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-2xl font-bold text-on-surface">★ {candidate.rating}</span>
-            <span className="text-body-sm text-on-surface-variant">based on {candidate.reviewsCount} verified project reviews</span>
-          </div>
-          <p className="text-body-md text-on-surface-variant italic border-l-2 border-primary-container pl-4">
-            "K.Thulaanchan delivered high-performance FastAPI endpoints on time and collaborated smoothly with the frontend team. Highly recommended collaborator!"
-          </p>
-        </div>
-      )}
-
-      {/* Connect Modal */}
-      <ModalContainer
-        isOpen={isConnectModalOpen}
-        onClose={() => setIsConnectModalOpen(false)}
-        title={`Connect with ${candidate.candidateName}`}
-      >
-        <div className="flex flex-col gap-4">
-          <Textarea
-            label="Invitation Message"
-            rows={4}
-            value={connectMessage}
-            onChange={(e) => setConnectMessage(e.target.value)}
-          />
-
-          <div className="flex justify-end gap-3 pt-4 border-t border-border-standard">
-            <SecondaryButton onClick={() => setIsConnectModalOpen(false)}>Cancel</SecondaryButton>
-            <PrimaryButton icon="send" iconPosition="right" onClick={handleSendConnect}>
-              Send Connection Request
-            </PrimaryButton>
-          </div>
-        </div>
-      </ModalContainer>
+        )}
+      </div>
     </div>
   );
 };
