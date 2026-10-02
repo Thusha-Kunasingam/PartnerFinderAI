@@ -41,7 +41,7 @@ export const App: React.FC = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Public Routes with Global Dark Header & Footer */}
+        {/* Public Routes with Global Dark Header & Footer (Exact Stitch Layout) */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<LandingPage />} />
 
@@ -54,6 +54,9 @@ export const App: React.FC = () => {
           <Route path="/connections/request/:candidateId" element={<SendConnectionRequestModal />} />
           <Route path="/connections/success/:candidateId" element={<ConnectionSuccessPage />} />
           <Route path="/connections/requests" element={<ConnectionRequestsPage />} />
+
+          {/* Direct Messaging / Chat Page */}
+          <Route path="/messages" element={<ChatPage />} />
 
           {/* Workspace Views */}
           <Route path="/workspace/:projectId" element={<CollaborationWorkspacePage />} />
@@ -73,8 +76,6 @@ export const App: React.FC = () => {
         {/* Authenticated Application Shell Routes (260px SideNavRail + 64px TopCommandBar) */}
         <Route element={<AppShellLayout />}>
           <Route path="/dashboard" element={<UserDashboardPage />} />
-          <Route path="/connections/requests" element={<ConnectionRequestsPage />} />
-          <Route path="/messages" element={<ChatPage />} />
         </Route>
 
         {/* Fallback route */}
