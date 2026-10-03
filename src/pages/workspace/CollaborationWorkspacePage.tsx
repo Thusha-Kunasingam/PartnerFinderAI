@@ -12,6 +12,7 @@ export const CollaborationWorkspacePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'tasks' | 'members' | 'files'>('members');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [activeMemberMenu, setActiveMemberMenu] = useState<string | null>(null);
 
   // Dynamic project lookup
   const currentWorkspace: ProjectWorkspace =
@@ -397,16 +398,63 @@ export const CollaborationWorkspacePage: React.FC = () => {
                       </button>
                     )}
 
-                    <button
-                      type="button"
-                      onClick={() =>
-                        navigate(`/candidates/${member.userId === 'user-thusha' ? 'k-thulaanchan' : member.userId}`)
-                      }
-                      className="w-9 h-9 rounded-lg border border-outline-variant flex items-center justify-center text-tertiary hover:text-on-surface hover:bg-surface-container transition-colors cursor-pointer"
-                      title="More options"
-                    >
-                      <span className="material-symbols-outlined text-[18px]">more_vert</span>
-                    </button>
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setActiveMemberMenu(activeMemberMenu === member.userId ? null : member.userId)
+                        }
+                        className="w-9 h-9 rounded-lg border border-outline-variant flex items-center justify-center text-tertiary hover:text-on-surface hover:bg-surface-container transition-colors cursor-pointer"
+                        title="More options"
+                      >
+                        <span className="material-symbols-outlined text-[18px]">more_vert</span>
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      {activeMemberMenu === member.userId && (
+                        <div className="absolute right-0 top-11 w-52 bg-surface-container-lowest rounded-xl border border-surface-container-high shadow-xl py-2 z-30 animate-in fade-in slide-in-from-top-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveMemberMenu(null);
+                              navigate(`/workspace/${currentWorkspace.id}/review/${member.userId}`);
+                            }}
+                            className="w-full text-left px-4 py-2 text-label-sm text-on-surface hover:bg-surface-bright flex items-center gap-2 cursor-pointer"
+                          >
+                            <span className="material-symbols-outlined text-[16px] text-amber-500">
+                              star
+                            </span>
+                            <span>Rate Teammate (Detailed)</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveMemberMenu(null);
+                              navigate(`/workspace/${currentWorkspace.id}/rate/${member.userId}`);
+                            }}
+                            className="w-full text-left px-4 py-2 text-label-sm text-on-surface hover:bg-surface-bright flex items-center gap-2 cursor-pointer"
+                          >
+                            <span className="material-symbols-outlined text-[16px] text-primary">
+                              rate_review
+                            </span>
+                            <span>Rate Teammate (Quick)</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveMemberMenu(null);
+                              navigate(`/candidates/${member.userId === 'user-thusha' ? 'k-thulaanchan' : member.userId}`);
+                            }}
+                            className="w-full text-left px-4 py-2 text-label-sm text-on-surface hover:bg-surface-bright flex items-center gap-2 border-t border-surface-container-high mt-1 cursor-pointer"
+                          >
+                            <span className="material-symbols-outlined text-[16px] text-tertiary">
+                              person
+                            </span>
+                            <span>View Full Profile</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               );
